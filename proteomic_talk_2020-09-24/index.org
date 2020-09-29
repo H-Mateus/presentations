@@ -1,0 +1,211 @@
+#+REVEAL_ROOT: ../reveal-root
+#+REVEAL_THEME: night
+#+OPTIONS: toc:nil num:nil date:t
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><br><h4>%a</h4><h5>https://gmbernardoharrington.netlify.app/</h5><h6>%d</h6>"
+#+REVEAL_HTML: <style>.reveal section img { background:none; border:none; box-shadow:none; }
+#+REVEAL_HTML: li {font-size: 75%; top: 3px;}</style>
+#+TITLE: iTRAQ Proteomics
+#+AUTHOR: Gabriel Mateus Bernardo Harrington
+#+DATE: 2020-09-25
+
+* History
+#+ATTR_REVEAL: :frag (t)
+- Developed in 2004 by Applied Biosystems Incorporation
+- Abbreviation: isobaric tag for relative and absolute quantitation
+- Method for determining the amount of proteins from different samples in a single mass spec run
+ 
+* iTRAQ reagents
+#+REVEAL_HTML: <div style="width: 85%">
+[[file:itraq_labels.png]]
+
+#+BEGIN_NOTES
+- Consist of a unique charged reporter group, a peptide reactive group and a neutral balance group
+- The peptide reactive group covalently links an isobaric tag to the lysine side chain and N-terminus group of a peptide
+- The balance group ensures labelled peptide displays the same mass to maintain an overall mass of 145 Da for 4-plex and 305 Da for 8-plex
+#+END_NOTES
+
+** Details
+- Consist of a unique charged reporter group, a peptide reactive group and a neutral balance group
+- The peptide reactive group covalently links an isobaric tag to the lysine side chain and N-terminus group of a peptide
+- The balance group ensures labelled peptide displays the same mass to maintain an overall mass of 145 Da for 4-plex and 305 Da for 8-plex
+* iTRAQ workflow
+
+[[file:image-iTRAQ-TMT-workflow2.png]]
+
+#+BEGIN_NOTES
+- Sample proteins are reduced and a cysteine blocking agent is added
+- Samples are then digested (typically by trypsin which cleaves at arginine and lysine) and labelled
+- The samples are then pooled and typically passed through a strong cation exchange column to remove excess unbound reagents
+- Subjected to tandem-mass-spectrometry
+- In the first scan (MS) a given peptide from each sample will produce the same peak
+- Then the mass spec puts the sample through a collision cell which further fragments the sample
+- This process removes the balance region from the tag, so the same peptide will now have a different m/z from each sample
+#+END_NOTES
+
+** Details
+- Sample proteins are reduced and a cysteine blocking agent is added
+- Samples are then digested (typically by trypsin) and labelled
+- The samples are then pooled and typically passed through a strong cation exchange column to remove excess unbound reagents
+- Subjected to tandem-mass-spectrometry
+- In the first scan (MS) a given peptide from each sample will produce the same peak
+- Then the mass spec puts the sample through a collision cell which further fragments the sample
+- This process removes the balance region from the tag, so the same peptide will now have a different m/z from each sample
+ 
+* Tandem mass spectrometry
+
+#+REVEAL_HTML: <iframe  width="425" height="344" src="https://www.youtube.com/embed/K1VSYjuw6os" frameborder="0" allowfullscreen></iframe>
+
+#+BEGIN_NOTES
+- Every 30 seconds the instrument scans a mass range
+- This is the MS scan, and it shows all of the intact ions being sprayed into the instrument
+- The intensity of all of these ions if summed and adds a line to the total ion chromatogram
+- The machine then looks at the MS scan for ions separated by 0.5 Da or less, which indicates it's multiply charged
+- The $^{12}C$ isotope of each multiply charge peptide is selected for further fragmentation to generate the MS/MS scan for each multiply charge peptide
+#+END_NOTES
+
+* Fractionation
+
+#+REVEAL_HTML: <div style="width: 88%">
+[[file:strong_cation_chromatography.jpg]]
+
+#+BEGIN_NOTES
+- After sample prep the mixture is very complex, and putting this straight into the mass spec would lead to missing a lot of data
+- The sample can therefore be fractionated to reduce it's complexity
+- This is commonly done via strong cation exchange
+  + The peptides are acidified to take on a positive charge
+  + The beads in the stationary phase of the column are negatively charged, so the peptides stick to them
+  + Increasing the amount of salt in the mobile phase will compete peptides away from the beads so they elute out of the column
+  + The speed at which peptides move through the column is determined by their charge, more negatively charged will elute faster
+#+END_NOTES
+
+* Identification
+- We can identify peptides from the MS/MS as we know the mass of the elements that make up amino acids
+- Therefore we can calculate the mass of the amino acids, and by extension, of peptides by their sequence of AAs.
+- So we'd like a database of possible sequences to use for identification
+** Problem
+- This search space is useably large. An 11 AA peptide can have $2\times 10^{14}$ theoretical sequences
+- This didn't matter for chemists who were only interested in simple molecules, so they could (and often still do) use spectral libraries
+- In 1994 a paper was published that pointed out that the search space could be massively reduced by restraining the search to known peptide sequences (identified by genome sequencing) in the organism of interest (as opposed to every theoretical combination) cite:eng_approach_1994
+- This combined with limiting to search for possible tryptic cleavage made protein identification viable
+- We can then further calculate the theoretical mass of the ions these peptides would generate if they were selected for fragmentation by the instrument
+** Matching peptide fragments to proteins
+
+[[file:protein_identification.jpg]]
+
+#+BEGIN_NOTES:
+- At this point we've assigned all of our MS/MS scans to multiple potential peptide fragments
+- Each one has a score based on how well the matched fragment matches the theoretical spectra from our database, and an expectation value, which is analogous to a p-value denoting the change that the match is incorrect.
+- Once the MS/MS scans are each assigned a peptide sequence that is most likely, the peptides belonging to the same proteins are grouped together, and the protein with the larges number of high scoring peptides is placed at the top of the list
+#+END_NOTES
+
+*** Details
+- At this point we've assigned all of our MS/MS scans to multiple potential peptide fragments
+- Each one has a score based on how well the matched fragment matches the theoretical spectra from our database, and an expectation value, which is analogous to a p-value denoting the change that the match is incorrect.
+- Once the MS/MS scans are each assigned a peptide sequence that is most likely, the peptides belonging to the same proteins are grouped together, and the protein with the larges number of high scoring peptides is placed at the top of the list
+
+** Fragmentation ladder
+
+[[file:fragmentation_ladder.png]]
+
+* Initial data
+#+PROPERTY: header-args :session R-example :width 9 :height 6.3 :results graphics file :exports results
+
+#+REVEAL_HTML: <div style="font-size: 70%">
+|     |                          | <50>                         |                              |                               |
+| Run | 114                      | 115                          | 116                          | 117                           |
+|-----+--------------------------+------------------------------+------------------------------+-------------------------------|
+|   1 | AIS C Improver @ 2-weeks | AIS C Improver @ 3-months    | AIS C Non-Improver @ 2-weeks | AIS C Non-Improver @ 3-months |
+|   2 | AIS C Improver @ 2-weeks | AIS C Non-Improver @ 2-weeks | AIS A                        | AIS D                         |
+
+** C acute run1
+
+#+BEGIN_SRC R :session R-example :file run1_foldchange_c_acute.svg :results graphics file :exports results
+library(tidyverse)
+#source custom plot theme
+source("/home/mateus/git_work/mateus/500_patient/scripts/custom_ggplot_theme_2020-01-08.R")
+# make list of bar graphs for each group
+load(file = "../../mateus/proteomics/data/protein_descriptions_long.rda")
+
+# note the use of sort before unique, if not used the order is changed, make
+# sure there is continuity between the first argument of lapply and it ggtitle -
+# the gsub call takes charaters up untill the first space
+plot_list <- lapply(sort(unique(protein_descriptions$group_labels)), function(i) {
+  ggplot(protein_descriptions[protein_descriptions$group_labels == i,], aes(x = reorder(gsub(" .*$", "", protein_name), - fold_change), y = fold_change, fill = -fold_change)) +
+    geom_bar(stat="identity", position = position_dodge()) +
+    ggtitle(sort(unique(protein_descriptions$group_labels))[i]) +
+    labs(x = "Protein", y = "Fold change", fill = "")
+
+})
+
+plot_list[[3]] +
+  ggtitle("Acute improvers vs non-improvers")
+#+END_SRC
+
+#+RESULTS:
+[[file:run1_foldchange_c_acute.svg]]
+
+** C sub-acute
+#+BEGIN_SRC R :file run1_foldchange_c_subacute.svg :results graphics file :exports results
+plot_list[[6]] +
+  ggtitle("Subacute improvers vs non-improvers")
+#+END_SRC
+
+#+RESULTS:
+[[file:run1_foldchange_c_subacute.svg]]
+
+** C acute run2
+#+BEGIN_SRC R :file run2_foldchange_c_acute.svg :results graphics file :exports results
+plot_list[[8]] +
+  ggtitle("Acute improvers vs non-improvers")
+#+END_SRC
+
+#+RESULTS:
+[[file:run2_foldchange_c_acute.svg]]
+
+** Network plots
+
+#+BEGIN_SRC R :file reactome_plots1.svg :results graphics file :exports results :height 6.3 :width 12.3
+load(file = "../../mateus/proteomics/data/reactome_plots_2020-07-27.rda")
+library(stringr)
+
+print(reactome_plots$heatmap[[2]] + scale_y_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                 width = 70)))
+#+END_SRC
+
+#+RESULTS:
+[[file:reactome_plots1.svg]]
+
+** Heatmap
+
+#+BEGIN_SRC R :file reactome_plots2.svg :results graphics file :exports results :height 6.3 :width 12.3
+print(reactome_plots$heatmap[[5]] + scale_y_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                 width = 70)))
+#+END_SRC
+
+#+RESULTS:
+[[file:reactome_plots2.svg]]
+
+** Heatmap continued
+
+#+BEGIN_SRC R :file reactome_plots7.svg :results graphics file :exports results :height 6.3 :width 12.3
+print(reactome_plots$heatmap[[7]] + scale_y_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                 width = 70)))
+#+END_SRC
+
+** Cnetplots
+
+#+BEGIN_SRC R :file reactome_cnetplots1.svg :results graphics file :exports results :height 6.3 :width 10
+print(reactome_plots$cnetplot[[2]])
+#+END_SRC
+
+** Cnetplots continued
+
+#+BEGIN_SRC R :file reactome_cnetplots2.svg :results graphics file :exports results :height 6.3 :width 10
+print(reactome_plots$cnetplot[[5]])
+#+END_SRC
+
+** Cnetplots continued
+
+#+BEGIN_SRC R :file reactome_cnetplots3.svg :results graphics file :exports results :height 6.3 :width 10
+print(reactome_plots$cnetplot[[7]])
+#+END_SRC

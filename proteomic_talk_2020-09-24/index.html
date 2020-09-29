@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>iTRAQ Proteomics</title>
+<meta name="author" content="(Gabriel Mateus Bernardo Harrington)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../reveal-root/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../reveal-root/dist/theme/night.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../reveal-root/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>iTRAQ Proteomics</h2><br><h4>Gabriel Mateus Bernardo Harrington</h4><h5>https://gmbernardoharrington.netlify.app/</h5><h6>2020-09-25</h6>
+</section>
+<style>.reveal section img { background:none; border:none; box-shadow:none; }
+li {font-size: 75%; top: 3px;}</style>
+
+<section>
+<section id="slide-org09ac982">
+<h2 id="org09ac982">History</h2>
+<ul>
+<li class="fragment">Developed in 2004 by Applied Biosystems Incorporation</li>
+<li class="fragment">Abbreviation: isobaric tag for relative and absolute quantitation</li>
+<li class="fragment">Method for determining the amount of proteins from different samples in a single mass spec run</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org4d48e72">
+<h2 id="org4d48e72">iTRAQ reagents</h2>
+<div style="width: 85%">
+
+<div class="figure">
+<p><img src="itraq_labels.png" alt="itraq_labels.png" />
+</p>
+</div>
+
+<aside class="notes">
+<ul>
+<li>Consist of a unique charged reporter group, a peptide reactive group and a neutral balance group</li>
+<li>The peptide reactive group covalently links an isobaric tag to the lysine side chain and N-terminus group of a peptide</li>
+<li>The balance group ensures labelled peptide displays the same mass to maintain an overall mass of 145 Da for 4-plex and 305 Da for 8-plex</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org42cef51">
+<h3 id="org42cef51">Details</h3>
+<ul>
+<li>Consist of a unique charged reporter group, a peptide reactive group and a neutral balance group</li>
+<li>The peptide reactive group covalently links an isobaric tag to the lysine side chain and N-terminus group of a peptide</li>
+<li>The balance group ensures labelled peptide displays the same mass to maintain an overall mass of 145 Da for 4-plex and 305 Da for 8-plex</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org95d805c">
+<h2 id="org95d805c">iTRAQ workflow</h2>
+
+<div class="figure">
+<p><img src="image-iTRAQ-TMT-workflow2.png" alt="image-iTRAQ-TMT-workflow2.png" />
+</p>
+</div>
+
+<aside class="notes">
+<ul>
+<li>Sample proteins are reduced and a cysteine blocking agent is added</li>
+<li>Samples are then digested (typically by trypsin which cleaves at arginine and lysine) and labelled</li>
+<li>The samples are then pooled and typically passed through a strong cation exchange column to remove excess unbound reagents</li>
+<li>Subjected to tandem-mass-spectrometry</li>
+<li>In the first scan (MS) a given peptide from each sample will produce the same peak</li>
+<li>Then the mass spec puts the sample through a collision cell which further fragments the sample</li>
+<li>This process removes the balance region from the tag, so the same peptide will now have a different m/z from each sample</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org18a7df1">
+<h3 id="org18a7df1">Details</h3>
+<ul>
+<li>Sample proteins are reduced and a cysteine blocking agent is added</li>
+<li>Samples are then digested (typically by trypsin) and labelled</li>
+<li>The samples are then pooled and typically passed through a strong cation exchange column to remove excess unbound reagents</li>
+<li>Subjected to tandem-mass-spectrometry</li>
+<li>In the first scan (MS) a given peptide from each sample will produce the same peak</li>
+<li>Then the mass spec puts the sample through a collision cell which further fragments the sample</li>
+<li>This process removes the balance region from the tag, so the same peptide will now have a different m/z from each sample</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcfaf59f">
+<h2 id="orgcfaf59f">Tandem mass spectrometry</h2>
+<iframe  width="425" height="344" src="https://www.youtube.com/embed/K1VSYjuw6os" frameborder="0" allowfullscreen></iframe>
+
+<aside class="notes">
+<ul>
+<li>Every 30 seconds the instrument scans a mass range</li>
+<li>This is the MS scan, and it shows all of the intact ions being sprayed into the instrument</li>
+<li>The intensity of all of these ions if summed and adds a line to the total ion chromatogram</li>
+<li>The machine then looks at the MS scan for ions separated by 0.5 Da or less, which indicates it&rsquo;s multiply charged</li>
+<li>The \(^{12}C\) isotope of each multiply charge peptide is selected for further fragmentation to generate the MS/MS scan for each multiply charge peptide</li>
+
+</ul>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf6d0b72">
+<h2 id="orgf6d0b72">Fractionation</h2>
+<div style="width: 88%">
+
+<div class="figure">
+<p><img src="strong_cation_chromatography.jpg" alt="strong_cation_chromatography.jpg" />
+</p>
+</div>
+
+<aside class="notes">
+<ul>
+<li>After sample prep the mixture is very complex, and putting this straight into the mass spec would lead to missing a lot of data</li>
+<li>The sample can therefore be fractionated to reduce it&rsquo;s complexity</li>
+<li>This is commonly done via strong cation exchange
+<ul>
+<li>The peptides are acidified to take on a positive charge</li>
+<li>The beads in the stationary phase of the column are negatively charged, so the peptides stick to them</li>
+<li>Increasing the amount of salt in the mobile phase will compete peptides away from the beads so they elute out of the column</li>
+<li>The speed at which peptides move through the column is determined by their charge, more negatively charged will elute faster</li>
+
+</ul></li>
+
+</ul>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgab1b033">
+<h2 id="orgab1b033">Identification</h2>
+<ul>
+<li>We can identify peptides from the MS/MS as we know the mass of the elements that make up amino acids</li>
+<li>Therefore we can calculate the mass of the amino acids, and by extension, of peptides by their sequence of AAs.</li>
+<li>So we&rsquo;d like a database of possible sequences to use for identification</li>
+
+</ul>
+</section>
+<section id="slide-org187d93e">
+<h3 id="org187d93e">Problem</h3>
+<ul>
+<li>This search space is useably large. An 11 AA peptide can have \(2\times 10^{14}\) theoretical sequences</li>
+<li>This didn&rsquo;t matter for chemists who were only interested in simple molecules, so they could (and often still do) use spectral libraries</li>
+<li>In 1994 a paper was published that pointed out that the search space could be massively reduced by restraining the search to known peptide sequences (identified by genome sequencing) in the organism of interest (as opposed to every theoretical combination) (<a href="#/slide-orgfd2d549">Eng, McCormack, and Yates, n.d.</a>)</li>
+<li>This combined with limiting to search for possible tryptic cleavage made protein identification viable</li>
+<li>We can then further calculate the theoretical mass of the ions these peptides would generate if they were selected for fragmentation by the instrument</li>
+
+</ul>
+</section>
+<section id="slide-org8f0e5bf">
+<h3 id="org8f0e5bf">Matching peptide fragments to proteins</h3>
+
+<div class="figure">
+<p><img src="protein_identification.jpg" alt="protein_identification.jpg" />
+</p>
+</div>
+
+<p>
+#+BEGIN<sub>NOTES</sub>:
+</p>
+<ul>
+<li>At this point we&rsquo;ve assigned all of our MS/MS scans to multiple potential peptide fragments</li>
+<li>Each one has a score based on how well the matched fragment matches the theoretical spectra from our database, and an expectation value, which is analogous to a p-value denoting the change that the match is incorrect.</li>
+<li>Once the MS/MS scans are each assigned a peptide sequence that is most likely, the peptides belonging to the same proteins are grouped together, and the protein with the larges number of high scoring peptides is placed at the top of the list</li>
+
+</ul>
+<p>
+#+END<sub>NOTES</sub>
+</p>
+
+</section>
+<section id="slide-org0af649c">
+<h4 id="org0af649c">Details</h4>
+<ul>
+<li>At this point we&rsquo;ve assigned all of our MS/MS scans to multiple potential peptide fragments</li>
+<li>Each one has a score based on how well the matched fragment matches the theoretical spectra from our database, and an expectation value, which is analogous to a p-value denoting the change that the match is incorrect.</li>
+<li>Once the MS/MS scans are each assigned a peptide sequence that is most likely, the peptides belonging to the same proteins are grouped together, and the protein with the larges number of high scoring peptides is placed at the top of the list</li>
+
+</ul>
+
+</section>
+<section id="slide-org28ce394">
+<h3 id="org28ce394">Fragmentation ladder</h3>
+
+<div class="figure">
+<p><img src="fragmentation_ladder.png" alt="fragmentation_ladder.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf80c68a">
+<h2 id="orgf80c68a">Initial data</h2>
+<div style="font-size: 70%">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Run</th>
+<th scope="col" class="org-left">114</th>
+<th scope="col" class="org-left">115</th>
+<th scope="col" class="org-left">116</th>
+<th scope="col" class="org-left">117</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">AIS C Improver @ 2-weeks</td>
+<td class="org-left">AIS C Improver @ 3-months</td>
+<td class="org-left">AIS C Non-Improver @ 2-weeks</td>
+<td class="org-left">AIS C Non-Improver @ 3-months</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">AIS C Improver @ 2-weeks</td>
+<td class="org-left">AIS C Non-Improver @ 2-weeks</td>
+<td class="org-left">AIS A</td>
+<td class="org-left">AIS D</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-org566e5dc">
+<h3 id="org566e5dc">C acute run1</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="run1_foldchange_c_acute.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org2f58b83">
+<h3 id="org2f58b83">C sub-acute</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="run1_foldchange_c_subacute.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org909fd96">
+<h3 id="org909fd96">C acute run2</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="run2_foldchange_c_acute.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org594a28c">
+<h3 id="org594a28c">Network plots</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_plots1.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org0c0baa4">
+<h3 id="org0c0baa4">Heatmap</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_plots2.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org79d75c4">
+<h3 id="org79d75c4">Heatmap continued</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_plots7.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-org5a46c16">
+<h3 id="org5a46c16">Cnetplots</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_cnetplots1.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-orge05e2d0">
+<h3 id="orge05e2d0">Cnetplots continued</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_cnetplots2.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+</section>
+<section id="slide-orgfe8dfa5">
+<h3 id="orgfe8dfa5">Cnetplots continued</h3>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="reactome_cnetplots3.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgacd1f7a">
+<h2 id="orgacd1f7a">Bibliography</h2>
+<p>
+<a id="orgfd2d549"></a>Eng, Jimmy K., Ashley L. McCormack, and John R. Yates. n.d. “An Approach to Correlate Tandem Mass Spectral Data of Peptides with Amino Acid Sequences in a Protein Database” 5 (11). American Chemical Society:976–89. <a href="https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502">https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502</a>.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../reveal-root/dist/reveal.js"></script>
+<script src="../reveal-root/plugin/markdown/markdown.js"></script>
+<script src="../reveal-root/plugin/zoom/zoom.js"></script>
+<script src="../reveal-root/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown,RevealZoom,RevealNotes],
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+]
+});
+</script>
+</body>
+</html>

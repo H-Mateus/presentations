@@ -1,0 +1,6 @@
+#+REVEAL_ROOT: ./reveal-root
+#+REVEAL_THEME: night
+#+OPTIONS: toc:nil num:nil date:nil email:t  reveal_title_slide:nil
+
+* Active presentations
+-[[file:proteomic_talk_2020-09-24/index.html][iTRAQ proteomics]]
