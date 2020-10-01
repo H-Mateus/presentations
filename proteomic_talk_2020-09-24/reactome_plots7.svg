@@ -336,12 +336,12 @@
 <clipPath id="clip1">
   <path d="M 819.042969 177.511719 L 836.324219 177.511719 L 836.324219 263.910156 L 819.042969 263.910156 Z M 819.042969 177.511719 "/>
 </clipPath>
-<image id="image1536" width="1" height="300" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAIAAACNMk6CAAAABmJLR0QA/wD/AP+gvaeTAAAAnUlEQVQ4jaWRSw4CMQxDHXP/6yIBbcKCaujHzQxiUSl+sZNIRQAEyACJ4906ba02oY3R8a9e66y39yHJYJPfZRTHX559Tt02587mjv11pr5V3ZHtyPw7fcVzXed3xcWM2jP/08rQsnpO5hn16FP6FxbJTuU5Y74wzb3Lu/D55POBfbh3XLHaWO10hbHAWAGWVhcYXzA+YXwAvMMAxBv4R7FhVRSURAAAAABJRU5ErkJggg=="/>
+<image id="image45" width="1" height="300" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAIAAACNMk6CAAAABmJLR0QA/wD/AP+gvaeTAAAAnUlEQVQ4jaWRSw4CMQxDHXP/6yIBbcKCaujHzQxiUSl+sZNIRQAEyACJ4906ba02oY3R8a9e66y39yHJYJPfZRTHX559Tt02587mjv11pr5V3ZHtyPw7fcVzXed3xcWM2jP/08rQsnpO5hn16FP6FxbJTuU5Y74wzb3Lu/D55POBfbh3XLHaWO10hbHAWAGWVhcYXzA+YXwAvMMAxBv4R7FhVRSURAAAAABJRU5ErkJggg=="/>
 <pattern id="pattern0" patternUnits="userSpaceOnUse" width="1" height="300"  patternTransform="matrix(17.28,0,0,0.288,819.041096,177.51114)">
-  <use xlink:href="#image1536"/>
+  <use xlink:href="#image45"/>
 </pattern>
 </defs>
-<g id="surface1532">
+<g id="surface41">
 <rect x="0" y="0" width="885" height="453" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <path style="fill-rule:nonzero;fill:rgb(90.196078%,0%,33.333333%);fill-opacity:1;stroke-width:0.213396;stroke-linecap:square;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 470.363281 174.617188 L 497.820312 174.617188 L 497.820312 162.167969 L 470.363281 162.167969 Z M 470.363281 174.617188 "/>
 <path style="fill-rule:nonzero;fill:rgb(91.372549%,0%,30.196078%);fill-opacity:1;stroke-width:0.213396;stroke-linecap:square;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 635.109375 174.617188 L 662.566406 174.617188 L 662.566406 162.167969 L 635.109375 162.167969 Z M 635.109375 174.617188 "/>

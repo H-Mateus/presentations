@@ -1,7 +1,7 @@
 #+REVEAL_ROOT: ../reveal-root
 #+REVEAL_THEME: night
 #+OPTIONS: toc:nil num:nil date:t
-#+OPTIONS: reveal_title_slide:"<h2>%t</h2><br><h4>%a</h4><h5>https://gmbernardoharrington.netlify.app/</h5><h6>%d</h6>"
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><br><h4>%a</h4><h5>https://h-mateus.github.io/presentations/</h5><h6>%d</h6>"
 #+REVEAL_HTML: <style>.reveal section img { background:none; border:none; box-shadow:none; }
 #+REVEAL_HTML: li {font-size: 75%; top: 3px;}</style>
 #+TITLE: iTRAQ Proteomics
@@ -104,7 +104,7 @@
 - Once the MS/MS scans are each assigned a peptide sequence that is most likely, the peptides belonging to the same proteins are grouped together, and the protein with the larges number of high scoring peptides is placed at the top of the list
 
 ** Fragmentation ladder
-
+ 
 [[file:fragmentation_ladder.png]]
 
 * Initial data
