@@ -27,14 +27,14 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2>iTRAQ Proteomics</h2><br><h4>Gabriel Mateus Bernardo Harrington</h4><h5>https://h-mateus.github.io/presentations/</h5><h6>2020-09-25</h6>
+<section id="sec-title-slide"><h2>iTRAQ Proteomics</h2><br><h4>Gabriel Mateus Bernardo Harrington</h4><h5>https://h-mateus.github.io/presentations/</h5><h6>2020-10-01</h6>
 </section>
 <style>.reveal section img { background:none; border:none; box-shadow:none; }
 li {font-size: 75%; top: 3px;}</style>
 
 <section>
-<section id="slide-orgd316b6a">
-<h2 id="orgd316b6a">History</h2>
+<section id="slide-orgdc5c5fa">
+<h2 id="orgdc5c5fa">History</h2>
 <ul>
 <li class="fragment">Developed in 2004 by Applied Biosystems Incorporation</li>
 <li class="fragment">Abbreviation: isobaric tag for relative and absolute quantitation</li>
@@ -45,8 +45,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-orge624952">
-<h2 id="orge624952">iTRAQ reagents</h2>
+<section id="slide-orgb7f06a6">
+<h2 id="orgb7f06a6">iTRAQ reagents</h2>
 <div style="width: 85%">
 
 <div class="figure">
@@ -65,8 +65,8 @@ li {font-size: 75%; top: 3px;}</style>
 </aside>
 
 </section>
-<section id="slide-orgc085c50">
-<h3 id="orgc085c50">Details</h3>
+<section id="slide-org0fe8a02">
+<h3 id="org0fe8a02">Details</h3>
 <ul>
 <li>Consist of a unique charged reporter group, a peptide reactive group and a neutral balance group</li>
 <li>The peptide reactive group covalently links an isobaric tag to the lysine side chain and N-terminus group of a peptide</li>
@@ -76,8 +76,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-orgec800f2">
-<h2 id="orgec800f2">iTRAQ workflow</h2>
+<section id="slide-org2c62441">
+<h2 id="org2c62441">iTRAQ workflow</h2>
 
 <div class="figure">
 <p><img src="image-iTRAQ-TMT-workflow2.png" alt="image-iTRAQ-TMT-workflow2.png" />
@@ -99,8 +99,8 @@ li {font-size: 75%; top: 3px;}</style>
 </aside>
 
 </section>
-<section id="slide-org3f98c11">
-<h3 id="org3f98c11">Details</h3>
+<section id="slide-org7feb447">
+<h3 id="org7feb447">Details</h3>
 <ul>
 <li>Sample proteins are reduced and a cysteine blocking agent is added</li>
 <li>Samples are then digested (typically by trypsin) and labelled</li>
@@ -115,8 +115,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-org2dcff77">
-<h2 id="org2dcff77">Tandem mass spectrometry</h2>
+<section id="slide-orgcddd61e">
+<h2 id="orgcddd61e">Tandem mass spectrometry</h2>
 <iframe  width="425" height="344" src="https://www.youtube.com/embed/K1VSYjuw6os" frameborder="0" allowfullscreen></iframe>
 
 <aside class="notes">
@@ -134,8 +134,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-org8d71a9b">
-<h2 id="org8d71a9b">Fractionation</h2>
+<section id="slide-orgd4f8b6b">
+<h2 id="orgd4f8b6b">Fractionation</h2>
 <div style="width: 88%">
 
 <div class="figure">
@@ -163,8 +163,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-orgc8dcdb5">
-<h2 id="orgc8dcdb5">Identification</h2>
+<section id="slide-orgcf94c0a">
+<h2 id="orgcf94c0a">Identification</h2>
 <ul>
 <li>We can identify peptides from the MS/MS as we know the mass of the elements that make up amino acids</li>
 <li>Therefore we can calculate the mass of the amino acids, and by extension, of peptides by their sequence of AAs.</li>
@@ -172,19 +172,19 @@ li {font-size: 75%; top: 3px;}</style>
 
 </ul>
 </section>
-<section id="slide-org7a10c98">
-<h3 id="org7a10c98">Problem</h3>
+<section id="slide-org6670661">
+<h3 id="org6670661">Problem</h3>
 <ul>
 <li>This search space is useably large. An 11 AA peptide can have \(2\times 10^{14}\) theoretical sequences</li>
 <li>This didn&rsquo;t matter for chemists who were only interested in simple molecules, so they could (and often still do) use spectral libraries</li>
-<li>In 1994 a paper was published that pointed out that the search space could be massively reduced by restraining the search to known peptide sequences (identified by genome sequencing) in the organism of interest (as opposed to every theoretical combination) (<a href="#/slide-orgb691caa">Eng, McCormack, and Yates, n.d.</a>)</li>
+<li>In 1994 a paper was published that pointed out that the search space could be massively reduced by restraining the search to known peptide sequences (identified by genome sequencing) in the organism of interest (as opposed to every theoretical combination) (<a href="#/slide-org1f27003">Eng, McCormack, and Yates, n.d.</a>)</li>
 <li>This combined with limiting to search for possible tryptic cleavage made protein identification viable</li>
 <li>We can then further calculate the theoretical mass of the ions these peptides would generate if they were selected for fragmentation by the instrument</li>
 
 </ul>
 </section>
-<section id="slide-org34c821a">
-<h3 id="org34c821a">Matching peptide fragments to proteins</h3>
+<section id="slide-orgca825b5">
+<h3 id="orgca825b5">Matching peptide fragments to proteins</h3>
 
 <div class="figure">
 <p><img src="protein_identification.jpg" alt="protein_identification.jpg" />
@@ -205,8 +205,8 @@ li {font-size: 75%; top: 3px;}</style>
 </p>
 
 </section>
-<section id="slide-org91f9775">
-<h4 id="org91f9775">Details</h4>
+<section id="slide-orgd1368b8">
+<h4 id="orgd1368b8">Details</h4>
 <ul>
 <li>At this point we&rsquo;ve assigned all of our MS/MS scans to multiple potential peptide fragments</li>
 <li>Each one has a score based on how well the matched fragment matches the theoretical spectra from our database, and an expectation value, which is analogous to a p-value denoting the change that the match is incorrect.</li>
@@ -215,8 +215,8 @@ li {font-size: 75%; top: 3px;}</style>
 </ul>
 
 </section>
-<section id="slide-orgd58fe7e">
-<h3 id="orgd58fe7e">Fragmentation ladder</h3>
+<section id="slide-org0a388f8">
+<h3 id="org0a388f8">Fragmentation ladder</h3>
 
 <div class="figure">
 <p><img src="fragmentation_ladder.png" alt="fragmentation_ladder.png" />
@@ -226,8 +226,8 @@ li {font-size: 75%; top: 3px;}</style>
 </section>
 </section>
 <section>
-<section id="slide-org93cb01d">
-<h2 id="org93cb01d">Initial data</h2>
+<section id="slide-orgbb5a3e4">
+<h2 id="orgbb5a3e4">Initial data</h2>
 <div style="font-size: 70%">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -272,8 +272,8 @@ li {font-size: 75%; top: 3px;}</style>
 </table>
 
 </section>
-<section id="slide-org84ca3aa">
-<h3 id="org84ca3aa">C acute run1</h3>
+<section id="slide-org233e6a5">
+<h3 id="org233e6a5">C acute run1</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="run1_foldchange_c_acute.svg" class="org-svg">
@@ -282,8 +282,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-orgd3cf992">
-<h3 id="orgd3cf992">C sub-acute</h3>
+<section id="slide-org00eba35">
+<h3 id="org00eba35">C sub-acute</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="run1_foldchange_c_subacute.svg" class="org-svg">
@@ -292,8 +292,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-org3804a46">
-<h3 id="org3804a46">C acute run2</h3>
+<section id="slide-orgac911fc">
+<h3 id="orgac911fc">C acute run2</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="run2_foldchange_c_acute.svg" class="org-svg">
@@ -302,8 +302,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-orgb400e16">
-<h3 id="orgb400e16">Network plots</h3>
+<section id="slide-org19b131d">
+<h3 id="org19b131d">Network plots</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_plots1.svg" class="org-svg">
@@ -312,8 +312,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-org066ec28">
-<h3 id="org066ec28">Heatmap</h3>
+<section id="slide-org3d451fc">
+<h3 id="org3d451fc">Heatmap</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_plots2.svg" class="org-svg">
@@ -322,8 +322,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-org893e83e">
-<h3 id="org893e83e">Heatmap continued</h3>
+<section id="slide-org308f66f">
+<h3 id="org308f66f">Heatmap continued</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_plots7.svg" class="org-svg">
@@ -332,8 +332,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-org3d4e500">
-<h3 id="org3d4e500">Cnetplots</h3>
+<section id="slide-org8f1f2fa">
+<h3 id="org8f1f2fa">Cnetplots</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_cnetplots1.svg" class="org-svg">
@@ -342,8 +342,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-org394cdbb">
-<h3 id="org394cdbb">Cnetplots continued</h3>
+<section id="slide-org4b88c48">
+<h3 id="org4b88c48">Cnetplots continued</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_cnetplots2.svg" class="org-svg">
@@ -352,8 +352,8 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 </section>
-<section id="slide-orgdadf97b">
-<h3 id="orgdadf97b">Cnetplots continued</h3>
+<section id="slide-org4631270">
+<h3 id="org4631270">Cnetplots continued</h3>
 
 <div class="figure">
 <p><object type="image/svg+xml" data="reactome_cnetplots3.svg" class="org-svg">
@@ -363,10 +363,10 @@ Sorry, your browser does not support SVG.</object>
 </section>
 </section>
 <section>
-<section id="slide-org15d9a3c">
-<h2 id="org15d9a3c">Bibliography</h2>
+<section id="slide-org9b66704">
+<h2 id="org9b66704">Bibliography</h2>
 <p>
-<a id="orgb691caa"></a>Eng, Jimmy K., Ashley L. McCormack, and John R. Yates. n.d. “An Approach to Correlate Tandem Mass Spectral Data of Peptides with Amino Acid Sequences in a Protein Database” 5 (11). American Chemical Society:976–89. <a href="https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502">https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502</a>.
+<a id="org1f27003"></a>Eng, Jimmy K., Ashley L. McCormack, and John R. Yates. n.d. “An Approach to Correlate Tandem Mass Spectral Data of Peptides with Amino Acid Sequences in a Protein Database” 5 (11). American Chemical Society:976–89. <a href="https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502">https://pubs.acs.org/doi/abs/10.1021/jasms.8b00502</a>.
 </p>
 </section>
 </section>

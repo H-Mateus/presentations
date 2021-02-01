@@ -6,7 +6,7 @@
 #+REVEAL_HTML: li {font-size: 75%; top: 3px;}</style>
 #+TITLE: iTRAQ Proteomics
 #+AUTHOR: Gabriel Mateus Bernardo Harrington
-#+DATE: 2020-09-25
+#+DATE: 2020-10-01
 
 * History
 #+ATTR_REVEAL: :frag (t)
