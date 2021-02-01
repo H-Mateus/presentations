@@ -1,0 +1,66 @@
+#+REVEAL_ROOT: ../reveal-root
+#+REVEAL_THEME: night
+#+OPTIONS: toc:nil num:nil date:f
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:t reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><br><h4>%a</h4><h5>https://h-mateus.github.io/presentations/</h5><h6>%d</h6>"
+#+REVEAL_HTML: <style>.reveal section img { background:none; border:none; box-shadow:none; }
+#+REVEAL_HTML: li {font-size: 75%; top: 3px;}</style>
+#+TITLE: SCI and the liver
+#+AUTHOR: Gabriel Mateus Bernardo Harrington
+#+SUBTITLE: What's the link?
+#+DATE: 2021-01-27
+
+* How did I get here?
+#+ATTR_REVEAL: :frag (t)
++ First [[https://www.liebertpub.com/doi/10.1089/neu.2019.6495][couple]] of [[https://www.liebertpub.com/doi/10.1089/neu.2020.7144][papers]] found markers of liver function add value to predictions of neurological outcomes
++ Proteomic work seems to suggest something similar
++ As it turns out, there be literature about it as well
+
+#+BEGIN_NOTES
++ talk about heterogeneity on SCI population - impact on new therapies, mental health, etc
++ go over papers briefly - blood vs csf, value of biomarkers
+#+END_NOTES
+
+* The livers response to trauma
+#+REVEAL_HTML: <div style="width: 70%">
+[[file:sci_liver_loop.jpg]]
+
+#+BEGIN_NOTES
++ Trauma leads to inflammatory cytokines in the blood
++ They reach the liver and triggers an "Acute phase response"
++ This eventually settles down, except when it doesn't (SCI + TBI)
++ So what makes SCI (and TBI) different?
+#+END_NOTES
+
+* SCI promotes chronic liver steatosis
+[[file:liver_stages.jpg]]
+
+#+BEGIN_NOTES
++ Chronic fat accumulation in liver observed months-years post-injury in animals and humans
+  - non-alcoholic fatty liver disease (NAFLD)
++ When accompanied by liver inflammation a more advanced stage -> non-alcoholic steatohepatitis (NASH) (10-fold increase in liver-related death)
++ Both are treatable, managed by diet and exercise, but if left untreated -> cirrhosis -> death
++ NAFLD closely linked to insulin resistance and type 2 diabetes
++ In addition to increased morbitiry and mortality
+#+END_NOTES
+
+* Intuition + reading = ideas
++ Difference prior to injury?
+  - pre-damaged liver due to lifestyle (drink/diet/etc)
+  - Genetics
++ Damage to sympathetic and parasympathetic signalling (T7-T12)?
++ "Leaky gut" -> microbiome bacteria + toxins in blood -> unhappy liver?
+
+#+BEGIN_NOTES
++ para/sympathetic signalling unlikely to be main cause as same observed in TBI, pre-clinical models of multiple sclerosis
++ Evidence for leaky gut:
+  - gut permeability found to increase 20% in rat SCI model
+  - genes encoding epithelial tight junctions found to be differentially expressed
+#+END_NOTES
+
+* Potential future work
++ Reanalyse "Yakult" study data
++ RNA seq on patient bloods, validate proteomics and allow for pathway analysis
++ Modelling of routine blood data from Glasgow trauma centre, validate initial modelling and compare bloods closer to initial injury

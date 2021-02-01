@@ -3,4 +3,5 @@
 #+OPTIONS: toc:nil num:nil date:nil email:t  reveal_title_slide:nil
 
 * Active presentations
--[[file:proteomic_talk_2020-09-24/index.html][iTRAQ proteomics]]
+- [[file:proteomic_talk_2020-09-24/index.html][iTRAQ proteomics]]
+- [[file:liver_sci_talk_2021-01-27/index.html][SCI and the liver]]
