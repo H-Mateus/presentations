@@ -1,7 +1,12 @@
 #+REVEAL_ROOT: ./reveal-root
 #+REVEAL_THEME: night
-#+OPTIONS: toc:nil num:nil date:nil email:t  reveal_title_slide:nil
+#+OPTIONS: toc:nil num:nil date:nil email:t reveal_title_slide:nil
+#+TITLE: Presentation
+#+AUTHOR: Gabriel Mateus Bernardo Harrington
+#+DATE: 2020-10-01
 
 * Active presentations
+Presentation repository can be found [[https://github.com/H-Mateus/presentations][here]].
+
 - [[file:proteomic_talk_2020-09-24/index.html][iTRAQ proteomics]]
 - [[file:liver_sci_talk_2021-01-27/index.html][SCI and the liver]]
