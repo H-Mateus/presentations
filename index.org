@@ -8,5 +8,6 @@
 * Active presentations
 Presentation repository can be found [[https://github.com/H-Mateus/presentations][here]].
 
+- [[file:reproducible_research_2021-04-30/index.html][Reproducible Research - CDT 2021]]
 - [[file:proteomic_talk_2020-09-24/index.html][iTRAQ proteomics]]
 - [[file:liver_sci_talk_2021-01-27/index.html][SCI and the liver]]
