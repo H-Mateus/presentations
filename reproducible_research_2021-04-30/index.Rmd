@@ -287,7 +287,6 @@ knitr::include_graphics("https://altc.alt.ac.uk/oesig/wp-content/uploads/sites/1
 ```{r, out.width="100%", echo=FALSE}
 knitr::include_graphics("https://assets.browserlondon.com/app/uploads/2020/08/XKCD-dependency.png")
 ```
-
 ]
 
 
