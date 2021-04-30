@@ -311,3 +311,17 @@ knitr::include_graphics("https://assets.browserlondon.com/app/uploads/2020/08/XK
 
 - Extra Reading:
   - [Is the staggeringly profitable business of scientific publishing bad for science? ](https://www.theguardian.com/science/2017/jun/27/profitable-business-scientific-publishing-bad-for-science)
+
+---
+
+### Links to this slide deck:
+
+The rendered slides can be found at this address:
+
+- [https://h-mateus.github.io/presentations/reproducible_research_2021-04-30/index.html#1](https://h-mateus.github.io/presentations/reproducible_research_2021-04-30/index.html#1)
+
+.center[
+![Link to rendered slides](repo_res_qr.png)
+]
+
+The raw files are on GitHub [here](https://github.com/H-Mateus/presentations) under the GPL license
