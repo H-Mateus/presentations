@@ -3,7 +3,7 @@ title: "Reproducible data analysis"
 subtitle: "Why you should learn to code"
 author: "Gabriel Mateus Bernardo Harrington"
 institute: "Keele University"
-date: "2021/04/30 (updated: `r Sys.Date()`)"
+date: "CDT Joint Conference - 2021/06/15<br>(updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     css: [default, nhsr, nhsr-fonts]
