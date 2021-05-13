@@ -1,6 +1,6 @@
 ---
-title: "Reproducible Research"
-subtitle: "Excel/SPSS vs R: Why should I care?"
+title: "Reproducible data analysis"
+subtitle: "Why you should learn to code"
 author: "Gabriel Mateus Bernardo Harrington"
 institute: "Keele University"
 date: "2021/04/30 (updated: `r Sys.Date()`)"
@@ -13,25 +13,42 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+bibliography: /home/mateus/Documents/masterLib.bib
+csl: /home/mateus/Documents/citation_styles/elsevier-vancouver.csl
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(RefManageR)
+## bib <- ReadBib("/home/mateus/Documents/masterLib.bib", check = FALSE)
 ```
 
-# Why use Excel?
+# Sibling articles
+
+- Science has a [reproducibility problem](https://royalsocietypublishing.org/doi/10.1098/rsos.160384)
+
+1. [The Sovereign of Science](https://gmbernardoharrington.netlify.app/post/the-sovereign-of-science/)
+  - Where I outline how scientists are not incentivised to produce quality research
+2. [How might science be done better?](https://gmbernardoharrington.netlify.app/post/how-might-science-be-done-better/)
+  - Where I explore ideas to improve transparency and reproducibility
+3. [Reproducible data analysis](https://oskor.netlify.app/post/reproducible-data-analysis/)
+ - A article version of this talk
+
+---
+
+# Your current tools?
 
 --
 
-- Has a (deceptively) friendly GUI
+- Excel, SPSS, Graphpad, etc.
+- Characterised by:
+  1. Limited and clunky graphic user interface (GUI)
+  1. Mixture of **data entry**, analysis, and visualisation
 
 --
 
-- Easy manipulation of **small** datasets
-
---
-
-- Can make *simple* and **ugly** plots
+- Question: Have you even asked if these tools are good for what you use them for?
+- Or have you ever wondered if there might be a better way?
 
 ![It's what I know](https://media.giphy.com/media/SwUqgyCG8mJZxHtnKS/giphy.gif)
 
@@ -45,11 +62,6 @@ class: center, middle
 
 ### So what's the problem you damn nerd?
 
-
---
-
-- Mixture of **data entry**, analysis, and visualisation
-
 --
 
 - A mistaken click or drag action can lead to errors or the overwriting of data
@@ -60,13 +72,13 @@ class: center, middle
 
 --
 
-- Doesn't scale to larger data
+- Doesn't scale to larger data, as our [glorious government learnt the hard way](https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england) during covid times.
 
 --
 
 - You have to pay for the software
-  - It also isn't supported across all platforms
-  - You don't have true ownership of your files
+  - It also isn't supported across all platforms (e.g: Microsoft Office on Linux)
+  - You don't have true ownership of your files, the licence holder can take away your ability to create/view/edit them at any time for any reason
 
 --
 
@@ -127,7 +139,7 @@ class: center, middle
 
 - Code is just a set of instructions for a computer to follow
 
-  - Thus steps of data manipulation/analysis are clearly laid out in the code
+  - Thus steps of data manipulation/analysis are clearly laid out in the code, in order.
   - This makes it possible for colleagues and collaborators to know what you've done and **replicate** it, even after you're gone
 
 --
@@ -140,16 +152,21 @@ class: center, middle
 --
 
 - Allows for easy use of the same method with new data
+- Increases your versatility as a scientist by giving you the ability to use:
+  - Machine learning/AI
+  - Omics data
+  - And anything else you can think of
+- Code necessarily can do everything a GUI can do, and a whole lot more besides
 
---
+---
+
+### And it makes you more employable!
+
+.center[![](https://media.giphy.com/media/xTiIzFiGj0C3RFKjHa/giphy.gif)]
 
 .center[You: "Sounds great! Is there anything else I can do to make my research more reproducible?"]
 
---
-
 .center[Me: "**I'm glad you asked**"]
-
---
 
 .center[You: "I was being sarcastic you stupid pri-"]
 
