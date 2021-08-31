@@ -38,7 +38,7 @@ library(RefManageR)
 1. [The Sovereign of Science](https://gmbernardoharrington.netlify.app/post/the-sovereign-of-science/)
   - Scientists are not incentivised to produce quality research
 2. [How might science be done better?](https://gmbernardoharrington.netlify.app/post/how-might-science-be-done-better/)
-  - Exploration ideas to improve transparency and reproducibility
+  - Exploration of ideas to improve transparency and reproducibility
 
 - A article version of this talk: [Reproducible data analysis](https://oskor.netlify.app/post/reproducible-data-analysis/)
 
