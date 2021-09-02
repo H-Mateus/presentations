@@ -15,7 +15,6 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-bibliography: /home/mateus/Documents/masterLib.bib
 csl: /home/mateus/Documents/citation_styles/elsevier-vancouver.csl
 ---
 
@@ -26,6 +25,22 @@ options(knitr.kable.NA = '') #sets NAs in tables to be blank
 library(xaringanthemer)
 library(tidyverse)
 library(kableExtra)
+library(ggVennDiagram)
+library(MSstats)
+library(RefManageR)
+library(leaflet)
+```
+
+```{r, load_refs, include=FALSE, cache=FALSE}
+## set citation styles
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "authoryear",
+           style = "markdown",
+           hyperlink = "to.doc",
+           dashed = FALSE)
+## read bib file. trying to read masterlib causes R to crash, maybe file size or non-standard charaters
+bib <- ReadBib("iscos_talk_2021.bib", check = FALSE)
 ```
 
 ```{r xaringan-themer, include=FALSE}
@@ -49,9 +64,63 @@ I declare to have no interests in the below:
 - Ownerships and possessions in companies related to health care (includes service provides, IT)
 - Compensation for expert functions in health care and consulting health care guidance processes
 
+.center[
+```{r, label='oswestry-leaflet', fig.height=4, fig.width=10.5 }
+leaflet() %>% addTiles() %>% setView(-3.033414, 52.884422, zoom = 16)
+```
+]
+
 ???
 
 - What an odd compulsory speil...
+
+---
+
+## Prior work
+
+- Modelling of neurological outcomes with routine heamatological markers`r AutoCite(bib, c("brown_preliminary_2019", "bernardo_harrington_routinely_2020"))`
+- Found markers associated with liver function added modest predictive value
+- Implicates metabolic health with outcomes
+
+.center[
+```{r rsquare-plot, out.width="50%"}
+df_models <- read_rds('heam_model_data.rds')
+
+rsquare_plot <- ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
+    geom_bar(stat="identity", position=position_dodge(), color = "black") +
+    xlab("") +
+    ylab(parse(text = "R^2")) +
+    scale_y_continuous(limits = c(0,1)) +
+    ## theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.5)) +
+    theme(legend.position = "bottom", axis.text = element_text(size = 12)) +
+    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                   width = 18)) +
+    coord_flip() +
+    theme_xaringan() +
+    scale_xaringan_fill_discrete(label = c("GLM", "LRM"), name = "Model")
+
+rsquare_plot
+```
+]
+
+---
+
+## Experimental design
+
+- Plasma from SCI human patients
+- Two time points:
+  1. "Acute": ~2-weeks post-injury
+  1. "Subacute": ~3-months post-injury<sup>*</sup>
+- Improvers are AIS C patients who experienced an AIS grade conversion
+- 2 4-plex iTRAQ runs and a more recent label-free experiment with all samples
+
+```{r, label='sample-counts'}
+sample_counts <- read_csv("sample_counts_2021-04-30.csv")
+kbl(sample_counts) %>%
+    kable_styling(bootstrap_options = c("hover"))
+```
+
+.footnote[<sup>*</sup> iTRAQ experiments did not include AIS A or D groups at the subacute time point]
 
 ---
 
@@ -81,57 +150,47 @@ knitr::include_graphics("../proteomic_talk_2020-09-24/itraq_labels.png")
 
 ---
 
-## Experimental design
-
-- Samples are plasma from SCI human patients
-- Two time points:
-  1. "Acute": ~2-weeks post-injury
-  1. "Subacute": ~3-months post-injury
-- Improvers are AIS C patients who experienced an AIS grade conversion
-
-```{r, label='sample-counts'}
-sample_counts <- read_csv("sample_counts_2021-04-30.csv")
-kbl(sample_counts) %>%
-    kable_styling(bootstrap_options = c("hover"))
-```
-
----
-
 ## iTRAQ proteins of interest
 
+### Alpha-2-macroglobulin
+
 .pull-left[
-```{r, label='itraq-plots', fig.retina=3}
-## make list of bar graphs for each group
-## load data
-load(file = "../../mateus/proteomics/data/protein_descriptions_long.rda")
+```{r, label='itraq-openms-data'}
+## openms data
+foldchange_list <- readRDS("../../mateus/proteomics/data/openms/protein_quantification_foldchanges.rds")
+## merge list of dfs
+fc_openms <- do.call(rbind, foldchange_list)
+## add run column
+fc_openms <- fc_openms %>%
+    rownames_to_column() %>%
+    dplyr::mutate(run = case_when(
+                      grepl("run1", rowname) ~ "1",
+                      TRUE ~ "2")) %>%
+    dplyr::mutate(piv_wide = paste(comparison, run, sep = "_run"))
+## sort group labels
+fc_openms$piv_wide <- as.factor(fc_openms$piv_wide)
+levels(fc_openms$piv_wide) <- c("Acute AIS A vs D",
+                                "Acute AIS C improvers vs A",
+                                "Acute AIS C improvers vs non-improvers",
+                                "Acute AIS C improvers vs non-improvers (2)",
+                                "AIS C improvers acute vs subacute",
+                                "Acute AIS C improvers vs D",
+                                "Acute AIS C non-improvers vs A",
+                                "AIS C non-improvers acute vs subacute",
+                                "Acute AIS C non-improvers vs D", "CROSS-RUN",
+                                "Subacute AIS C improvers vs non-improvers",
+                                "CROSS-RUN2", "CROSS-RUN3", "CROSS-RUN4")
 ## vector of proteins to filter to
-proteins <- c("A2M -|APOE -|RBP4 -|SAA1 -")
+proteins <- c("A2M|APOE|RBP4|SAA1")
 ## filter df
-df_filt <- protein_descriptions %>%
-    dplyr::filter(grepl(proteins, protein_name)) %>%
-    dplyr::mutate(prot = gsub( " .*$", "", protein_name),
-        prot_full_name = strsplit(protein_name, " - ")[[1]][2])
-## update group labels
-df_filt$group_labels <- as.factor(df_filt$group_labels)
-new_labs <- c("Acute A VS Acute D",
-              "Acute VS Subacute C improvers",
-              "Acute C improvers VS non-improvers",
-              "Acute C improvers VS Subacute non-improvers",
-              "Subacute C improvers VS Acute C non-improvers",
-              "Subacute C improvers VS non-improvers",
-              "Acute Vs Subacute C non-improvers",
-              "Acute C improvers VS non-improvers (2)",
-              "Acute C improvers VS Acute A",
-              "Acute C improvers VS Acute D",
-              "Acute C non-improvers VS Acute A",
-              "Acute C non-improvers VS Acute D")
-levels(df_filt$group_labels) <- new_labs
+df_filt <- fc_openms %>%
+    dplyr::filter(grepl(proteins, gene) & !grepl("CROSS", piv_wide))
 ## plot
 df_filt %>%
-    dplyr::filter(prot == "A2M") %>%
-    ggplot(aes(x = reorder(group_labels, -fold_change), y = fold_change, fill = group_labels)) +
+    dplyr::filter(gene == "A2M") %>%
+    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
     geom_bar(stat="identity", position = position_dodge()) +
-    facet_wrap( ~ prot) +
+    facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
     theme(legend.position = "none", axis.text = element_text(size = 12)) +
     scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
@@ -143,139 +202,152 @@ df_filt %>%
 ]
 
 .pull-right[
-- [Alpha-2-macroglobulin](https://www.uniprot.org/uniprot/P01023)
-  - Protease inhibitor
+- [Alpha-2-macroglobulin](https://www.unigene.org/uniprot/P01023)
+  - Inhibitor of virtually any protease
+  - A2M-protease complex cleared mainly by hepatocytes `r AutoCite(bib, "bond_incorporation_2007")`
+  - Less A2M -> more protease activity -> enhanced clearance of damaged tissue?
+  - Attenuation of glial scar formation?
 ]
+
+???
+
+- FCs between -1 and 1 are suspect
+- Downreg in acute and subacute C imp vs non-imp (~ -1 & ~ -0.2 fc)
+- Downreg in C groups vs A, upreg in C vs D - tracks with severity
 
 ---
 
-- [Alpha-2-macroglobulin](https://www.uniprot.org/uniprot/P01023)
-  - Less abundant in acute AIS C improvers relative to non-improvers
-  - Protease inhibitor
-- Several apolipoproteins, ApoE in particular
+## iTRAQ proteins of interest
+
+### Apolipoproteins
+
+.pull-left[
+```{r, label='apoe-plot'}
+df_filt %>%
+    dplyr::filter(gene == "APOE") %>%
+    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    geom_bar(stat="identity", position = position_dodge()) +
+    facet_wrap( ~ gene) +
+    labs(x = "", y = expression(log[2] ~ fold - change)) +
+    theme(legend.position = "none", axis.text = element_text(size = 12)) +
+    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                   width = 18)) +
+    coord_flip() +
+    theme_xaringan() +
+    scale_xaringan_fill_discrete()
+```
+]
+
+.pull-right[
+- Several apolipoproteins, ApoE and ApoA1 (main component of High-Density Lipoprotein (HDL)) in particular
+- ApoE mainly produced by hepatocytes, serves as ligand for Low-Density Lipoprotein receptors which mediates cholesterol traffic to neurons, **vital for axonal growth, synapse formation and remodelling** `r Cite(bib, "xu_interactions_2014")`
+- The ApoE4 variant is associated with poorer outcomes in SCI, TBI and Alzheimer's Disease `r Cite(bib, "jha_apolipoprotein_2008")`
+]
+
+???
+
+- Downreg in acute C imp vs non-imp (~ -1.25 fc)
+- Upreg in subacute C imp vs non-imp (~ 0.3 fc)
+- Downreg in C groups and D vs A
+
+---
+
+## iTRAQ proteins of interest
+
+### Serum amyloid A1
+
+.pull-left[
+```{r, label='saa1-plot'}
+df_filt %>%
+    dplyr::filter(gene == "SAA1") %>%
+    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    geom_bar(stat="identity", position = position_dodge()) +
+    facet_wrap( ~ gene) +
+    labs(x = "", y = expression(log[2] ~ fold - change)) +
+    theme(legend.position = "none", axis.text = element_text(size = 12)) +
+    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                   width = 18)) +
+    coord_flip() +
+    theme_xaringan() +
+    scale_xaringan_fill_discrete()
+```
+]
+
+.pull-right[
 - [Serum amyloid A1](https://www.uniprot.org/uniprot/P0DJI8)
+- Precursor of amyloid A, the aberrant deposition of which leads to inflammatory amyloidosis `r Cite(bib, "sun_serum_2016")`
+- Produced by hepatocytes, during acute phase response they associate with HDL, displacing ApoA1 `r Cite(bib, "benditt_amyloid_1977")`
+- SAA binding HDL is thought to favour removal of cholesterol from sites of inflammation
+]
+
+???
+
+- Downreg in acute C imp vs non-imp (~ -2.5 fc)
+- Upreg in subacute C imp vs non-imp (~ 2.4 fc)
+- Downreg in C groups and D vs A
+
+---
+
+## iTRAQ proteins of interest
+
+### Retinol-binding protein 4
+
+.pull-left[
+```{r, label='rbp4-plot'}
+df_filt %>%
+    dplyr::filter(gene == "RBP4") %>%
+    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    geom_bar(stat="identity", position = position_dodge()) +
+    facet_wrap( ~ gene) +
+    labs(x = "", y = expression(log[2] ~ fold - change)) +
+    theme(legend.position = "none", axis.text = element_text(size = 12)) +
+    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                   width = 18)) +
+    coord_flip() +
+    theme_xaringan() +
+    scale_xaringan_fill_discrete()
+```
+]
+
+.pull-right[
 - [Retinol-binding protein 4](https://www.uniprot.org/uniprot/P02753)
-
-class: center, middle
-
-![Sounds great!](https://media.giphy.com/media/26tk03guzOxhjkL6w/giphy.gif)
-
----
-
-.pull-left[
-
-![](https://media.giphy.com/media/xT1XGzXhVgWRLN1Cco/giphy.gif)
-<br/>
-
-![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
-]
-.pull-right[
-
-![](https://media.giphy.com/media/Wsju5zAb5kcOfxJV9i/giphy.gif)
-![](https://media.giphy.com/media/MdA16VIoXKKxNE8Stk/giphy.gif)
+- Key transporter proteins for vitamin A (retinol)
+- Retinoid signalling is involved in spinal cord and motor neuron differentiation `r Cite(bib, "lane_role_2005")`
+- Transgenic mouse studies have implicated retinoid signalling in retained plasticity and regenerative potential of the mature spinal cord `r Cite(bib, "haskell_retinoic_2002")`
 ]
 
+???
+
+- Similar modest upreg in acute and subacute C imp vs non-imp (~ 0.42 fc), but in run 2 there's a large downreg (~ -4 fc) for the acute
+- Upreg in subacute C imp vs non-imp (~ 2.4 fc)
+- Downreg in acute C imp vs D and A (~ -1.7 & -3 fc), but upreg in acute C non-imp vs D and A (~ 1.2 & 2.5 fc)
 ---
 
-### And it makes you more employable!
+## iTRAQ key pathway - Complement cascade
 
-.center[![](https://media.giphy.com/media/xTiIzFiGj0C3RFKjHa/giphy.gif)]
+- Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
+- Many of these proteins interact with the liver in some capacity
+- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor
 
-.center[You: "Sounds great! Is there anything else I can do to make my research more reproducible?"]
-
-.center[Me: "**I'm glad you asked**"]
-
-.center[You: "I was being sarcastic you stupid pri-"]
-
----
-
-## What is "version control", and why should you care?
-
---
-
-.left-column[![git logo](https://torbjornzetterlund.com/wp-content/uploads/2015/06/git-logo.png)]
-
-- System that records changes to a file or set of files over time
-
---
-
-- Nerds returned and made various flavours of **Distributed Version Control Systems** of which **Git** is the most popular
-
----
-
-## So what does Git do?
-
-- Automatically tracks any changes within a local "repository" (AKA a git repo)
-  - A repo is just a folder with a repo initialised in it
-
-- A service like [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/product) can then be used to upload your local repository
-  - It doesn't matter which you use, the basic functionality is the same
-
---
-
-- Any changes the collaborate makes can then be re-synced to the shared repo
-  - Git allows you to see who has made what changes to each file
-  - Git also requires you to make a comment when you perform a commit, giving a summary of what each change did
-
-.pull-left[
-![](https://logz.io/wp-content/uploads/2016/03/github.png)
-]
-.pull-right[
-```{r, out.width="80%", echo=FALSE}
-knitr::include_graphics("https://cdn-images-1.medium.com/max/1600/1*j9hbjszo0zXS32yhvSkdAQ.jpeg")
+```{r, label='kegg-complement', fig.align="center"}
+knitr::include_graphics("../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png")
 ```
 
-]
+???
+
+The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
 
 ---
 
-## Licensing considerations
+## Label-free proteins
 
-.pull-left[
-- You don't need to be a lawyer, but you should be aware of some common licenses to watch out for
+- Data still being analysed
+- Substantial overlap in proteins identified
+- Complement cascade still the most significant
 
-- Stick to using free and open-source software as much as possible
-  - Work that relies on paid licenses **isn't** reproducible!
-]
-
-.pull-right[
-```{r, out.width="80%", echo=FALSE}
-knitr::include_graphics("https://altc.alt.ac.uk/oesig/wp-content/uploads/sites/1119/2016/07/creative-commons-783531_1280.png")
-```
-]
-
-- Also worth thinking about licensing your work
-
-- [Creative commons licences](https://creativecommons.org/licenses/) are generally very permissive, but there are multiple version to match different concerns:
-  - Attribution (give me credit)
-  - ShareAlike (new creations must share license terms)
-  - NoDerivs (no sharing in adapted form)
-  - NonCommercial (self-explanatory...)
-
-- Alternatives: [GPL](https://www.gnu.org/licenses/gpl-3.0.en.html), [MIT](https://www.mit.edu/~amini/LICENSE.md), etc.
-
----
-
-## Containerisation: bringing it all together
-
-- So what if someone actually wants to download your data, script/s and writing and try to reproduce them?
-
-.pull-left[
-- They may run into the fun of [dependency hell](https://www.browserlondon.com/blog/2020/09/02/dependency-hell-how-to-avoid-it/)
-  - They may have different versions of software, or be missing a dependency that's no longer available
-
-- Solution: Containerisation
-  - "A standardised unit of software"
-  - Packages up code and dependencies to run consistently in different computing environments
-  - [Docker](https://www.docker.com/resources/what-container) is a popular approach
-]
-
-.pull-right[
-```{r, out.width="100%", echo=FALSE}
-knitr::include_graphics("https://assets.browserlondon.com/app/uploads/2020/08/XKCD-dependency.png")
-```
-]
-
+- Early proteins of interest:
+  - Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
+  - Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? `r Cite(bib, "brennan_ivig_2016")`
 
 ---
 
@@ -283,10 +355,12 @@ knitr::include_graphics("https://assets.browserlondon.com/app/uploads/2020/08/XK
 
 The rendered slides can be found at this address:
 
-- [https://h-mateus.github.io/presentations/reproducible_research_2021-04-30/index.html#1](https://h-mateus.github.io/presentations/reproducible_research_2021-04-30/index.html#1)
+- [https://h-mateus.github.io/presentations/iscos_sci_proteomics_2021-08-31/index.html#1](https://h-mateus.github.io/presentations/iscos_sci_proteomics_2021-08-31/index.html#1)
 
 .center[
-![Link to rendered slides](repo_res_qr.png)
+```{r, label='slidedeck-qr-code', out.width="15%"}
+knitr::include_graphics("slides_qr-code.png")
+```
 ]
 
 The raw files are on GitHub [here](https://github.com/H-Mateus/presentations) under the GPL license
@@ -296,10 +370,27 @@ The raw files are on GitHub [here](https://github.com/H-Mateus/presentations) un
 .pull-left[
 - Thanks to humans: Karina Wright, Paul Cool, Charlotte Hulme & the rest of the [OsKOR team](https://oskor.netlify.app/)
 - Thanks for the money: [EPSRC](https://epsrc.ukri.org/)
+- Thanks to the open-source community: Yihui Xie's [xaringan](https://github.com/yihui/xaringan) in particular for these slides
 ]
 
 .pull-right[
-```{r, label='epscr', out.width='80%'}
-knitr::include_graphics("iscos_conference_title_image.jpg")
+```{r, label='epscr', out.width='90%'}
+knitr::include_graphics("../reproducible_research_2021-04-30/EPSRC+logo.png")
 ```
 ]
+
+---
+
+## References
+
+```{r, label='print-bib', results="asis"}
+PrintBibliography(bib, start = 1, end = 5)
+```
+
+---
+
+## References cont.
+
+```{r, label='print-bib-cont', results="asis"}
+PrintBibliography(bib, start = 6, end = 11)
+```
