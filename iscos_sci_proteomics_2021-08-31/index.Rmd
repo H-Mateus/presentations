@@ -78,15 +78,77 @@ leaflet() %>% addTiles() %>% setView(-3.033414, 52.884422, zoom = 16)
 
 ## Prior work
 
+```{r, label='data-prep'}
+## openms data
+foldchange_list <- readRDS("../../mateus/proteomics/data/openms/protein_quantification_foldchanges.rds")
+## merge list of dfs
+fc_openms <- do.call(rbind, foldchange_list)
+## add run column
+fc_openms <- fc_openms %>%
+    rownames_to_column() %>%
+    dplyr::mutate(run = case_when(
+                      grepl("run1", rowname) ~ "1",
+                      TRUE ~ "2")) %>%
+    dplyr::mutate(group_labels = paste(comparison, run, sep = "_run"))
+## sort group labels
+fc_openms$group_labels <- as.factor(fc_openms$group_labels)
+levels(fc_openms$group_labels) <- c("Acute AIS A vs D",
+                                "Acute AIS C improvers vs A",
+                                "Acute AIS C improvers vs non-improvers",
+                                "Acute AIS C improvers vs non-improvers (2)",
+                                "AIS C improvers acute vs subacute",
+                                "Acute AIS C improvers vs D",
+                                "Acute AIS C non-improvers vs A",
+                                "AIS C non-improvers acute vs subacute",
+                                "Acute AIS C non-improvers vs D", "CROSS-RUN",
+                                "Subacute AIS C improvers vs non-improvers",
+                                "CROSS-RUN2", "CROSS-RUN3", "CROSS-RUN4")
+## vector of proteins to filter to
+proteins <- c("A2M|APOE|RBP4|SAA1")
+## filter df
+df_filt_oms <- fc_openms %>%
+    dplyr::filter(grepl(proteins, gene) & !grepl("CROSS", group_labels))
+
+## proteinpilot data
+load(file = "../../mateus/proteomics/data/protein_descriptions_long.rda")
+## vector of proteins to filter to
+proteins <- c("A2M -|APOE -|RBP4 -|SAA1 -")
+## filter df
+df_filt_pp <- protein_descriptions %>%
+    dplyr::filter(grepl(proteins, protein_name)) %>%
+    dplyr::mutate(gene = gsub( " .*$", "", protein_name),
+        prot_full_name = strsplit(protein_name, " - ")[[1]][2])
+## update group labels
+df_filt_pp$group_labels <- as.factor(df_filt_pp$group_labels)
+new_labs <- c("Acute A VS Acute D",
+              "Acute VS Subacute C improvers",
+              "Acute C improvers VS non-improvers",
+              "Acute C improvers VS Subacute non-improvers",
+              "Subacute C improvers VS Acute C non-improvers",
+              "Subacute C improvers VS non-improvers",
+              "Acute Vs Subacute C non-improvers",
+              "Acute C improvers VS non-improvers (2)",
+              "Acute C improvers VS Acute A",
+              "Acute C improvers VS Acute D",
+              "Acute C non-improvers VS Acute A",
+              "Acute C non-improvers VS Acute D")
+levels(df_filt_pp$group_labels) <- new_labs
+df_filt_pp$log2_fold_change <- df_filt_pp$fold_change
+## choose which dataset to use
+df_filt <- df_filt_pp
+## df_filt <- df_filt_oms
+
+## get model data
+df_models <- read_rds('heam_model_data.rds')
+```
+
 - Modelling of neurological outcomes with routine heamatological markers`r AutoCite(bib, c("brown_preliminary_2019", "bernardo_harrington_routinely_2020"))`
 - Found markers associated with liver function added modest predictive value
 - Implicates metabolic health with outcomes
 
 .center[
 ```{r rsquare-plot, out.width="50%"}
-df_models <- read_rds('heam_model_data.rds')
-
-rsquare_plot <- ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
+ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
     geom_bar(stat="identity", position=position_dodge(), color = "black") +
     xlab("") +
     ylab(parse(text = "R^2")) +
@@ -98,8 +160,6 @@ rsquare_plot <- ggplot(df_models, aes(x = target_name, y = Rsquare, fill = model
     coord_flip() +
     theme_xaringan() +
     scale_xaringan_fill_discrete(label = c("GLM", "LRM"), name = "Model")
-
-rsquare_plot
 ```
 ]
 
@@ -124,29 +184,19 @@ kbl(sample_counts) %>%
 
 ---
 
-## "Bottom-up" Proteomics - A brief overview
+## iTRAQ key pathway - Complement cascade
 
-1. Extract consistent total protein concentration for each sample
-1. Optional dimensionality reduction steps (e.g. via Proteominer&trade; beads)
-1. Digest proteins (Trypsin is commonly used)
-1. For labelled techniques, the labels are applied
-1. Samples are fed through some flavour of chromatography and into the mass spec (e.g. high-performance liquid chromatography)
+- Total number of proteins identified: `r length(unique(fc_openms$gene))`
+- Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
+- Many of these proteins interact with the liver in some capacity
 
---
-
-### Techniques used:
-
-- Isobaric tag for relative and absolute quantitation ([iTRAQ](https://en.wikipedia.org/wiki/Isobaric_tag_for_relative_and_absolute_quantitation)) and [label-free](https://en.wikipedia.org/wiki/Label-free_quantification) proteomic experiments were conducted
-
-.center[
-```{r, label='itraq-tag', out.width="40%"}
-knitr::include_graphics("../proteomic_talk_2020-09-24/itraq_labels.png")
+```{r, label='kegg-complement', fig.align="center"}
+knitr::include_graphics("../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png")
 ```
-]
 
 ???
 
-- Highlight complexity and uncertainty in measurements - put data in context, further work needed etc.
+The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
 
 ---
 
@@ -156,39 +206,10 @@ knitr::include_graphics("../proteomic_talk_2020-09-24/itraq_labels.png")
 
 .pull-left[
 ```{r, label='itraq-openms-data'}
-## openms data
-foldchange_list <- readRDS("../../mateus/proteomics/data/openms/protein_quantification_foldchanges.rds")
-## merge list of dfs
-fc_openms <- do.call(rbind, foldchange_list)
-## add run column
-fc_openms <- fc_openms %>%
-    rownames_to_column() %>%
-    dplyr::mutate(run = case_when(
-                      grepl("run1", rowname) ~ "1",
-                      TRUE ~ "2")) %>%
-    dplyr::mutate(piv_wide = paste(comparison, run, sep = "_run"))
-## sort group labels
-fc_openms$piv_wide <- as.factor(fc_openms$piv_wide)
-levels(fc_openms$piv_wide) <- c("Acute AIS A vs D",
-                                "Acute AIS C improvers vs A",
-                                "Acute AIS C improvers vs non-improvers",
-                                "Acute AIS C improvers vs non-improvers (2)",
-                                "AIS C improvers acute vs subacute",
-                                "Acute AIS C improvers vs D",
-                                "Acute AIS C non-improvers vs A",
-                                "AIS C non-improvers acute vs subacute",
-                                "Acute AIS C non-improvers vs D", "CROSS-RUN",
-                                "Subacute AIS C improvers vs non-improvers",
-                                "CROSS-RUN2", "CROSS-RUN3", "CROSS-RUN4")
-## vector of proteins to filter to
-proteins <- c("A2M|APOE|RBP4|SAA1")
-## filter df
-df_filt <- fc_openms %>%
-    dplyr::filter(grepl(proteins, gene) & !grepl("CROSS", piv_wide))
 ## plot
 df_filt %>%
     dplyr::filter(gene == "A2M") %>%
-    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
@@ -211,6 +232,13 @@ df_filt %>%
 
 ???
 
+### Proteinpilot data
+
+- Downreg in acute vs subacute for both C
+- Downreg in acute C imp vs non-imp (~10 & 6 fc)
+- less abundant in Ds, more abundant in C non-imp vs A
+
+### OpenMs data
 - FCs between -1 and 1 are suspect
 - Downreg in acute and subacute C imp vs non-imp (~ -1 & ~ -0.2 fc)
 - Downreg in C groups vs A, upreg in C vs D - tracks with severity
@@ -225,7 +253,7 @@ df_filt %>%
 ```{r, label='apoe-plot'}
 df_filt %>%
     dplyr::filter(gene == "APOE") %>%
-    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
@@ -246,6 +274,17 @@ df_filt %>%
 
 ???
 
+- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor should gene seq become ubiquitous
+
+### ProteinPilot data
+
+- Downreg in acute Cs vs subacute, both groups, imp gap bigger
+- upreg in A and D relative to both acute Cs
+- less abundant in subacute imp vs non-imp - may be reflective of severity
+
+
+### Openms data
+
 - Downreg in acute C imp vs non-imp (~ -1.25 fc)
 - Upreg in subacute C imp vs non-imp (~ 0.3 fc)
 - Downreg in C groups and D vs A
@@ -260,7 +299,7 @@ df_filt %>%
 ```{r, label='saa1-plot'}
 df_filt %>%
     dplyr::filter(gene == "SAA1") %>%
-    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
@@ -278,10 +317,17 @@ df_filt %>%
 - Precursor of amyloid A, the aberrant deposition of which leads to inflammatory amyloidosis `r Cite(bib, "sun_serum_2016")`
 - Produced by hepatocytes, during acute phase response they associate with HDL, displacing ApoA1 `r Cite(bib, "benditt_amyloid_1977")`
 - SAA binding HDL is thought to favour removal of cholesterol from sites of inflammation
+- SAA can also bind retinol, potentially limiting bacterial burden in tissues `r Cite(bib, "derebe_serum_2014")`
 ]
 
 ???
 
+### Proteinpilot
+
+- way more abundant in subacute C imp vs non-imp (~28 fc)
+- even more so in acute C imp vs D
+
+### Openms
 - Downreg in acute C imp vs non-imp (~ -2.5 fc)
 - Upreg in subacute C imp vs non-imp (~ 2.4 fc)
 - Downreg in C groups and D vs A
@@ -296,7 +342,7 @@ df_filt %>%
 ```{r, label='rbp4-plot'}
 df_filt %>%
     dplyr::filter(gene == "RBP4") %>%
-    ggplot(aes(x = reorder(piv_wide, -log2_fold_change), y = log2_fold_change, fill = piv_wide)) +
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
@@ -318,36 +364,30 @@ df_filt %>%
 
 ???
 
+### Proteinpilot
+
+- bottom bar: up in acute c imps vs non-imps
+
+### Openms
 - Similar modest upreg in acute and subacute C imp vs non-imp (~ 0.42 fc), but in run 2 there's a large downreg (~ -4 fc) for the acute
 - Upreg in subacute C imp vs non-imp (~ 2.4 fc)
 - Downreg in acute C imp vs D and A (~ -1.7 & -3 fc), but upreg in acute C non-imp vs D and A (~ 1.2 & 2.5 fc)
 ---
 
-## iTRAQ key pathway - Complement cascade
-
-- Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
-- Many of these proteins interact with the liver in some capacity
-- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor
-
-```{r, label='kegg-complement', fig.align="center"}
-knitr::include_graphics("../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png")
-```
-
-???
-
-The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
-
----
-
-## Label-free proteins
+## Label-free proteomics
 
 - Data still being analysed
 - Substantial overlap in proteins identified
 - Complement cascade still the most significant
 
 - Early proteins of interest:
-  - Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
-  - Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? `r Cite(bib, "brennan_ivig_2016")`
+ - Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
+ - Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? `r Cite(bib, "brennan_ivig_2016")`
+
+### Link between metabolic status and SCI?
+
+- Mounting evidence to support a link between the liver, and perhaps metabolic health more broadly, and SCI, including neurological outcomes
+- Excellent review by Goodus and McTigue on the topic `r Cite(bib, "goodus_hepatic_2020")`
 
 ---
 
@@ -384,7 +424,7 @@ knitr::include_graphics("../reproducible_research_2021-04-30/EPSRC+logo.png")
 ## References
 
 ```{r, label='print-bib', results="asis"}
-PrintBibliography(bib, start = 1, end = 5)
+PrintBibliography(bib, start = 1, end = 4)
 ```
 
 ---
@@ -392,5 +432,13 @@ PrintBibliography(bib, start = 1, end = 5)
 ## References cont.
 
 ```{r, label='print-bib-cont', results="asis"}
-PrintBibliography(bib, start = 6, end = 11)
+PrintBibliography(bib, start = 5, end = 9)
+```
+
+---
+
+## References cont.
+
+```{r, label='print-bib-cont-2', results="asis"}
+PrintBibliography(bib, start = 10, end = 14)
 ```

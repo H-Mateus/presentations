@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 # Proteomic and bioinformatics analyses of plasma from SCI neurological improvers and non-improvers
 ### Gabriel Mateus Bernardo Harrington
 ### Keele University
-### ISCoS 2021: VIRTUAL<br>Presented: 2021-10-01<br>(updated: 2021-09-02)
+### ISCoS 2021: VIRTUAL<br>Presented: 2021-10-01<br>(updated: 2021-09-03)
 
 ---
 
@@ -48,8 +48,8 @@ I declare to have no interests in the below:
 - Compensation for expert functions in health care and consulting health care guidance processes
 
 .center[
-<div id="htmlwidget-f2fda9ecb139a512e2f2" style="width:756px;height:288px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f2fda9ecb139a512e2f2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[52.884422,-3.033414],16,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-80e8397d92b804caa531" style="width:756px;height:288px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-80e8397d92b804caa531">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[52.884422,-3.033414],16,[]]},"evals":[],"jsHooks":[]}</script>
 ]
 
 ???
@@ -59,6 +59,8 @@ I declare to have no interests in the below:
 ---
 
 ## Prior work
+
+
 
 - Modelling of neurological outcomes with routine heamatological markers([Brown, Harrington, Hulme, et al., 2019](https://doi.org/10.1089/neu.2019.6495); [Bernardo Harrington, Cool, Hulme, et al., 2020](https://doi.org/10.1089/neu.2020.7144))
 - Found markers associated with liver function added modest predictive value
@@ -144,6 +146,20 @@ I declare to have no interests in the below:
 
 ---
 
+## iTRAQ key pathway - Complement cascade
+
+- Total number of proteins identified: 79
+- Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
+- Many of these proteins interact with the liver in some capacity
+
+&lt;img src="../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png" width="586" style="display: block; margin: auto;" /&gt;
+
+???
+
+The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
+
+---
+
 ## iTRAQ proteins of interest
 
 ### Alpha-2-macroglobulin
@@ -162,6 +178,13 @@ I declare to have no interests in the below:
 
 ???
 
+### Proteinpilot data
+
+- Downreg in acute vs subacute for both C
+- Downreg in acute C imp vs non-imp (~10 &amp; 6 fc)
+- less abundant in Ds, more abundant in C non-imp vs A
+
+### OpenMs data
 - FCs between -1 and 1 are suspect
 - Downreg in acute and subacute C imp vs non-imp (~ -1 &amp; ~ -0.2 fc)
 - Downreg in C groups vs A, upreg in C vs D - tracks with severity
@@ -184,6 +207,17 @@ I declare to have no interests in the below:
 
 ???
 
+- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor should gene seq become ubiquitous
+
+### ProteinPilot data
+
+- Downreg in acute Cs vs subacute, both groups, imp gap bigger
+- upreg in A and D relative to both acute Cs
+- less abundant in subacute imp vs non-imp - may be reflective of severity
+
+
+### Openms data
+
 - Downreg in acute C imp vs non-imp (~ -1.25 fc)
 - Upreg in subacute C imp vs non-imp (~ 0.3 fc)
 - Downreg in C groups and D vs A
@@ -203,10 +237,17 @@ I declare to have no interests in the below:
 - Precursor of amyloid A, the aberrant deposition of which leads to inflammatory amyloidosis ([Sun and Ye, 2016](https://doi.org/10.1016/j.gene.2016.02.044))
 - Produced by hepatocytes, during acute phase response they associate with HDL, displacing ApoA1 ([Benditt and Eriksen, 1977](https://doi.org/10.1073/pnas.74.9.4025))
 - SAA binding HDL is thought to favour removal of cholesterol from sites of inflammation
+- SAA can also bind retinol, potentially limiting bacterial burden in tissues ([Derebe, Zlatkov, Gattu, et al., 2014](https://doi.org/10.7554/elife.03206))
 ]
 
 ???
 
+### Proteinpilot
+
+- way more abundant in subacute C imp vs non-imp (~28 fc)
+- even more so in acute C imp vs D
+
+### Openms
 - Downreg in acute C imp vs non-imp (~ -2.5 fc)
 - Upreg in subacute C imp vs non-imp (~ 2.4 fc)
 - Downreg in C groups and D vs A
@@ -230,34 +271,30 @@ I declare to have no interests in the below:
 
 ???
 
+### Proteinpilot
+
+- bottom bar: up in acute c imps vs non-imps
+
+### Openms
 - Similar modest upreg in acute and subacute C imp vs non-imp (~ 0.42 fc), but in run 2 there's a large downreg (~ -4 fc) for the acute
 - Upreg in subacute C imp vs non-imp (~ 2.4 fc)
 - Downreg in acute C imp vs D and A (~ -1.7 &amp; -3 fc), but upreg in acute C non-imp vs D and A (~ 1.2 &amp; 2.5 fc)
 ---
 
-## iTRAQ key pathway - Complement cascade
-
-- Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
-- Many of these proteins interact with the liver in some capacity
-- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor
-
-&lt;img src="../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png" width="586" style="display: block; margin: auto;" /&gt;
-
-???
-
-The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
-
----
-
-## Label-free proteins
+## Label-free proteomics
 
 - Data still being analysed
 - Substantial overlap in proteins identified
 - Complement cascade still the most significant
 
 - Early proteins of interest:
-  - Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
-  - Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? ([Brennan, Kurniawan, Vukovic, et al., 2016](https://doi.org/10.1002/acn3.318))
+ - Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
+ - Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? ([Brennan, Kurniawan, Vukovic, et al., 2016](https://doi.org/10.1002/acn3.318))
+
+### Link between metabolic status and SCI?
+
+- Mounting evidence to support a link between the liver, and perhaps metabolic health more broadly, and SCI, including neurological outcomes
+- Excellent review by Goodus and McTigue on the topic &lt;a name=cite-goodus_hepatic_2020&gt;&lt;/a&gt;([Goodus and McTigue, 2020](https://doi.org/10.1016/j.expneurol.2019.113160))
 
 ---
 
@@ -295,24 +332,34 @@ _Proceedings of the National Academy of Sciences_ 74.9, pp. 4025-4028. ISSN: 002
 &lt;a name=bib-bernardo_harrington_routinely_2020&gt;&lt;/a&gt;[Bernardo Harrington, G. M., P. Cool, C. Hulme, et al.](#cite-bernardo_harrington_routinely_2020) (2020). "Routinely Measured Haematological Markers Can
 Help to Predict AIS Scores Following Spinal Cord Injury". In: _Journal of Neurotrauma_. ISSN: 0897-7151. DOI: [10.1089/neu.2020.7144](https://doi.org/10.1089%2Fneu.2020.7144).
 
-Bond, J. E., G. J. Cianciolo, and S. V. Pizzo (2007). "Incorporation of Low Molecular Weight Molecules into $A$2-Macroglobulin by Nucleophilic Exchange". En. In: _Biochemical and Biophysical Research
-Communications_ 357.2, pp. 433-438. ISSN: 0006-291X. DOI: [10.1016/j.bbrc.2007.03.151](https://doi.org/10.1016%2Fj.bbrc.2007.03.151).
+&lt;a name=bib-bond_incorporation_2007&gt;&lt;/a&gt;[Bond, J. E., G. J. Cianciolo, and S. V. Pizzo](#cite-bond_incorporation_2007) (2007). "Incorporation of Low Molecular Weight Molecules into Alpha2-Macroglobulin by
+Nucleophilic Exchange". En. In: _Biochemical and Biophysical Research Communications_ 357.2, pp. 433-438. ISSN: 0006-291X. DOI: [10.1016/j.bbrc.2007.03.151](https://doi.org/10.1016%2Fj.bbrc.2007.03.151).
 
 &lt;a name=bib-brennan_ivig_2016&gt;&lt;/a&gt;[Brennan, F. H., N. D. Kurniawan, J. Vukovic, et al.](#cite-brennan_ivig_2016) (2016). "IVIg Attenuates Complement and Improves Spinal Cord Injury Outcomes in Mice". En.
 In: _Annals of Clinical and Translational Neurology_ 3.7, pp. 495-511. ISSN: 2328-9503. DOI: [10.1002/acn3.318](https://doi.org/10.1002%2Facn3.318).
 
-&lt;a name=bib-brown_preliminary_2019&gt;&lt;/a&gt;[Brown, S. J., G. M. Harrington, C. H. Hulme, et al.](#cite-brown_preliminary_2019) (2019). "A Preliminary Cohort Study Assessing Routine Blood Analyte Levels and
-Neurological Outcome after Spinal Cord Injury". In: _Journal of Neurotrauma_. ISSN: 0897-7151. DOI: [10.1089/neu.2019.6495](https://doi.org/10.1089%2Fneu.2019.6495).
-
 ---
 
 ## References cont.
+
+&lt;a name=bib-brown_preliminary_2019&gt;&lt;/a&gt;[Brown, S. J., G. M. Harrington, C. H. Hulme, et al.](#cite-brown_preliminary_2019) (2019). "A Preliminary Cohort Study Assessing Routine Blood Analyte Levels and
+Neurological Outcome after Spinal Cord Injury". In: _Journal of Neurotrauma_. ISSN: 0897-7151. DOI: [10.1089/neu.2019.6495](https://doi.org/10.1089%2Fneu.2019.6495).
+
+&lt;a name=bib-derebe_serum_2014&gt;&lt;/a&gt;[Derebe, M. G., C. M. Zlatkov, S. Gattu, et al.](#cite-derebe_serum_2014) (2014). "Serum Amyloid A Is a Retinol Binding Protein That Transports Retinol during Bacterial
+Infection". In: _eLife_ 3. Ed. by F. M. Powrie, p. e03206. ISSN: 2050-084X. DOI: [10.7554/elife.03206](https://doi.org/10.7554%2Felife.03206).
+
+&lt;a name=bib-goodus_hepatic_2020&gt;&lt;/a&gt;[Goodus, M. T. and D. M. McTigue](#cite-goodus_hepatic_2020) (2020). "Hepatic Dysfunction after Spinal Cord Injury: A Vicious Cycle of Central and Peripheral Pathology?"
+En. In: _Experimental Neurology_ 325, p. 113160. ISSN: 0014-4886. DOI: [10.1016/j.expneurol.2019.113160](https://doi.org/10.1016%2Fj.expneurol.2019.113160).
 
 &lt;a name=bib-haskell_retinoic_2002&gt;&lt;/a&gt;[Haskell, G. T., T. M. Maynard, R. A. Shatzmiller, et al.](#cite-haskell_retinoic_2002) (2002). "Retinoic Acid Signaling at Sites of Plasticity in the Mature Central
 Nervous System". En. In: _Journal of Comparative Neurology_ 452.3, pp. 228-241. ISSN: 1096-9861. DOI: [10.1002/cne.10369](https://doi.org/10.1002%2Fcne.10369).
 
 &lt;a name=bib-jha_apolipoprotein_2008&gt;&lt;/a&gt;[Jha, A., D. P. Lammertse, J. R. Coll, et al.](#cite-jha_apolipoprotein_2008) (2008). "Apolipoprotein E E4 Allele and Outcomes of Traumatic Spinal Cord Injury". In:
 _The Journal of Spinal Cord Medicine_ 31.2, pp. 171-176. ISSN: 1079-0268.
+
+---
+
+## References cont.
 
 &lt;a name=bib-lane_role_2005&gt;&lt;/a&gt;[Lane, M. A. and S. J. Bailey](#cite-lane_role_2005) (2005). "Role of Retinoid Signalling in the Adult Brain". En. In: _Progress in Neurobiology_ 75.4, pp. 275-293. ISSN:
 0301-0082. DOI: [10.1016/j.pneurobio.2005.03.002](https://doi.org/10.1016%2Fj.pneurobio.2005.03.002).
