@@ -142,9 +142,9 @@ df_filt <- df_filt_pp
 df_models <- read_rds('heam_model_data.rds')
 ```
 
-- Modelling of neurological outcomes with routine heamatological markers`r AutoCite(bib, c("brown_preliminary_2019", "bernardo_harrington_routinely_2020"))`
+- Modelling of SCI neurological outcomes with routine haematological markers `r AutoCite(bib, c("brown_preliminary_2019", "bernardo_harrington_routinely_2020"))`
 - Found markers associated with liver function added modest predictive value
-- Implicates metabolic health with outcomes
+- Implicates liver status/metabolic health with neurological outcomes
 
 .center[
 ```{r rsquare-plot, out.width="50%"}
@@ -154,14 +154,51 @@ ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
     ylab(parse(text = "R^2")) +
     scale_y_continuous(limits = c(0,1)) +
     ## theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.5)) +
-    theme(legend.position = "bottom", axis.text = element_text(size = 12)) +
     scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
-                                                   width = 18)) +
+                                                   width = 20)) +
     coord_flip() +
     theme_xaringan() +
-    scale_xaringan_fill_discrete(label = c("GLM", "LRM"), name = "Model")
+    scale_xaringan_fill_discrete(label = c("GLM", "LRM"), name = "Model") +
+    theme(legend.position = "bottom", axis.text = element_text(size = 18, face="bold", colour = "white"))
 ```
 ]
+
+---
+
+## "Bottom-up" Proteomics - A brief overview
+
+1. Extract consistent total protein concentration for each sample
+1. Optional dimensionality reduction steps (e.g. via Proteominer&trade; beads)
+1. Digest proteins (Trypsin is commonly used)
+1. For labelled techniques, the labels are applied
+1. Samples are fed through some flavour of chromatography and into the mass spec (e.g. high-performance liquid chromatography)
+
+--
+
+### Techniques used:
+
+- Isobaric tag for relative and absolute quantitation ([iTRAQ](https://en.wikipedia.org/wiki/Isobaric_tag_for_relative_and_absolute_quantitation)) and [label-free](https://en.wikipedia.org/wiki/Label-free_quantification) proteomic experiments were conducted
+
+.center[
+```{r, label='itraq-tag', out.width="40%"}
+knitr::include_graphics("../proteomic_talk_2020-09-24/itraq_labels.png")
+```
+]
+
+???
+
+- Highlight complexity and uncertainty in measurements - put data in context, further work needed etc.
+
+---
+
+## Dynamic range reduction via<br>Proteominer&trade; beads
+
+- Abundant proteins saturate beads, whereas less abundant proteins don't
+- Once the column is washed, the excess abundant proteins are removed, and the less abundant proteins are retained, thus the dynamic range is reduced
+
+```{r, label='proteomic-diagram', fig.align="center"}
+knitr::include_graphics("label-free_and_itraq_image_ch.png")
+```
 
 ---
 
@@ -200,100 +237,7 @@ The fold changes in the KEGG pathway are from the Acute AIS C improvers relative
 
 ---
 
-## iTRAQ proteins of interest
-
-### Alpha-2-macroglobulin
-
-.pull-left[
-```{r, label='itraq-openms-data'}
-## plot
-df_filt %>%
-    dplyr::filter(gene == "A2M") %>%
-    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
-    geom_bar(stat="identity", position = position_dodge()) +
-    facet_wrap( ~ gene) +
-    labs(x = "", y = expression(log[2] ~ fold - change)) +
-    theme(legend.position = "none", axis.text = element_text(size = 12)) +
-    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
-                                                   width = 18)) +
-    coord_flip() +
-    theme_xaringan() +
-    scale_xaringan_fill_discrete()
-```
-]
-
-.pull-right[
-- [Alpha-2-macroglobulin](https://www.unigene.org/uniprot/P01023)
-  - Inhibitor of virtually any protease
-  - A2M-protease complex cleared mainly by hepatocytes `r AutoCite(bib, "bond_incorporation_2007")`
-  - Less A2M -> more protease activity -> enhanced clearance of damaged tissue?
-  - Attenuation of glial scar formation?
-]
-
-???
-
-### Proteinpilot data
-
-- Downreg in acute vs subacute for both C
-- Downreg in acute C imp vs non-imp (~10 & 6 fc)
-- less abundant in Ds, more abundant in C non-imp vs A
-
-### OpenMs data
-- FCs between -1 and 1 are suspect
-- Downreg in acute and subacute C imp vs non-imp (~ -1 & ~ -0.2 fc)
-- Downreg in C groups vs A, upreg in C vs D - tracks with severity
-
----
-
-## iTRAQ proteins of interest
-
-### Apolipoproteins
-
-.pull-left[
-```{r, label='apoe-plot'}
-df_filt %>%
-    dplyr::filter(gene == "APOE") %>%
-    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
-    geom_bar(stat="identity", position = position_dodge()) +
-    facet_wrap( ~ gene) +
-    labs(x = "", y = expression(log[2] ~ fold - change)) +
-    theme(legend.position = "none", axis.text = element_text(size = 12)) +
-    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
-                                                   width = 18)) +
-    coord_flip() +
-    theme_xaringan() +
-    scale_xaringan_fill_discrete()
-```
-]
-
-.pull-right[
-- Several apolipoproteins, ApoE and ApoA1 (main component of High-Density Lipoprotein (HDL)) in particular
-- ApoE mainly produced by hepatocytes, serves as ligand for Low-Density Lipoprotein receptors which mediates cholesterol traffic to neurons, **vital for axonal growth, synapse formation and remodelling** `r Cite(bib, "xu_interactions_2014")`
-- The ApoE4 variant is associated with poorer outcomes in SCI, TBI and Alzheimer's Disease `r Cite(bib, "jha_apolipoprotein_2008")`
-]
-
-???
-
-- Future studies modelling SCI outcomes may wish to incorporate ApoE variant as a factor should gene seq become ubiquitous
-
-### ProteinPilot data
-
-- Downreg in acute Cs vs subacute, both groups, imp gap bigger
-- upreg in A and D relative to both acute Cs
-- less abundant in subacute imp vs non-imp - may be reflective of severity
-
-
-### Openms data
-
-- Downreg in acute C imp vs non-imp (~ -1.25 fc)
-- Upreg in subacute C imp vs non-imp (~ 0.3 fc)
-- Downreg in C groups and D vs A
-
----
-
-## iTRAQ proteins of interest
-
-### Serum amyloid A1
+## iTRAQ key protein identified: Serum amyloid A1
 
 .pull-left[
 ```{r, label='saa1-plot'}
@@ -303,12 +247,14 @@ df_filt %>%
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
-    theme(legend.position = "none", axis.text = element_text(size = 12)) +
+    theme(legend.position = "none", axis.text = element_text(size = 15, face = "bold")) +
     scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
-                                                   width = 18)) +
+                                                   width = 15)) +
     coord_flip() +
     theme_xaringan() +
-    scale_xaringan_fill_discrete()
+    scale_xaringan_fill_discrete() +
+    theme(legend.position = "none",
+          axis.text = element_text(size = 15, face = "bold", colour = "white"))
 ```
 ]
 
@@ -334,46 +280,6 @@ df_filt %>%
 
 ---
 
-## iTRAQ proteins of interest
-
-### Retinol-binding protein 4
-
-.pull-left[
-```{r, label='rbp4-plot'}
-df_filt %>%
-    dplyr::filter(gene == "RBP4") %>%
-    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
-    geom_bar(stat="identity", position = position_dodge()) +
-    facet_wrap( ~ gene) +
-    labs(x = "", y = expression(log[2] ~ fold - change)) +
-    theme(legend.position = "none", axis.text = element_text(size = 12)) +
-    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
-                                                   width = 18)) +
-    coord_flip() +
-    theme_xaringan() +
-    scale_xaringan_fill_discrete()
-```
-]
-
-.pull-right[
-- [Retinol-binding protein 4](https://www.uniprot.org/uniprot/P02753)
-- Key transporter proteins for vitamin A (retinol)
-- Retinoid signalling is involved in spinal cord and motor neuron differentiation `r Cite(bib, "lane_role_2005")`
-- Transgenic mouse studies have implicated retinoid signalling in retained plasticity and regenerative potential of the mature spinal cord `r Cite(bib, "haskell_retinoic_2002")`
-]
-
-???
-
-### Proteinpilot
-
-- bottom bar: up in acute c imps vs non-imps
-
-### Openms
-- Similar modest upreg in acute and subacute C imp vs non-imp (~ 0.42 fc), but in run 2 there's a large downreg (~ -4 fc) for the acute
-- Upreg in subacute C imp vs non-imp (~ 2.4 fc)
-- Downreg in acute C imp vs D and A (~ -1.7 & -3 fc), but upreg in acute C non-imp vs D and A (~ 1.2 & 2.5 fc)
----
-
 ## Label-free proteomics
 
 - Data still being analysed
@@ -389,33 +295,43 @@ df_filt %>%
 - Mounting evidence to support a link between the liver, and perhaps metabolic health more broadly, and SCI, including neurological outcomes
 - Excellent review by Goodus and McTigue on the topic `r Cite(bib, "goodus_hepatic_2020")`
 
+???
+
+- touch on future work
+- validation at Glasgow
+
 ---
 
-#### Links to this slide deck:
+## Links to this slide deck:
 
 The rendered slides can be found at this address:
 
 - [https://h-mateus.github.io/presentations/iscos_sci_proteomics_2021-08-31/index.html#1](https://h-mateus.github.io/presentations/iscos_sci_proteomics_2021-08-31/index.html#1)
 
 .center[
-```{r, label='slidedeck-qr-code', out.width="15%"}
+```{r, label='slidedeck-qr-code', out.width="40%"}
 knitr::include_graphics("slides_qr-code.png")
 ```
-]
 
 The raw files are on GitHub [here](https://github.com/H-Mateus/presentations) under the GPL license
+]
 
-#### Acknowledgements
+---
+
+## Acknowledgements
 
 .pull-left[
-- Thanks to humans: Karina Wright, Paul Cool, Charlotte Hulme & the rest of the [OsKOR team](https://oskor.netlify.app/)
-- Thanks for the money: [EPSRC](https://epsrc.ukri.org/)
-- Thanks to the open-source community: Yihui Xie's [xaringan](https://github.com/yihui/xaringan) in particular for these slides
+- Thanks to my supervisors: Karina Wright, Paul Cool, Charlotte Hulme & the rest of the [OsKOR team](https://oskor.netlify.app/)
+- Thanks to the clinical team at the [Midland Centre for Spinal Injuries](https://www.rjah.nhs.uk/Our-Services/Spinal-Injuries-Unit.aspx), and all the patients who've donated to our biobank
+- Thanks for the funding: [EPSRC](https://epsrc.ukri.org/)
+- Thanks to the open-source community for facilitating this research, Yihui Xie's R package [xaringan](https://github.com/yihui/xaringan) in particular for these slides
 ]
 
 .pull-right[
 ```{r, label='epscr', out.width='90%'}
-knitr::include_graphics("../reproducible_research_2021-04-30/EPSRC+logo.png")
+knitr::include_graphics("../logos/EPSRC+logo.png")
+knitr::include_graphics("../logos/keele_logo.jpg")
+knitr::include_graphics("../logos/rjah_logo.png")
 ```
 ]
 
@@ -432,13 +348,5 @@ PrintBibliography(bib, start = 1, end = 4)
 ## References cont.
 
 ```{r, label='print-bib-cont', results="asis"}
-PrintBibliography(bib, start = 5, end = 9)
-```
-
----
-
-## References cont.
-
-```{r, label='print-bib-cont-2', results="asis"}
-PrintBibliography(bib, start = 10, end = 14)
+PrintBibliography(bib, start = 5, end = 7)
 ```

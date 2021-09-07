@@ -361,6 +361,6 @@ The raw files are on GitHub [here](https://github.com/H-Mateus/presentations) un
 
 .pull-right[
 ```{r, label='epscr', out.width='80%'}
-knitr::include_graphics("EPSRC+logo.png")
+knitr::include_graphics("../logos/EPSRC+logo.png")
 ```
 ]
