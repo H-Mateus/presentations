@@ -228,7 +228,7 @@ kbl(sample_counts) %>%
 - Many of these proteins interact with the liver in some capacity
 
 ```{r, label='kegg-complement', fig.align="center"}
-knitr::include_graphics("../../mateus/proteomics/figures/kegg_pathways/hsa04610_pathview.png")
+knitr::include_graphics("hsa04610_pathview.png")
 ```
 
 ???
