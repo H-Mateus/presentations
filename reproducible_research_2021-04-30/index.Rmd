@@ -12,6 +12,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
+      ratio: "16:9"
       countIncrementalSlides: false
 bibliography: /home/mateus/Documents/masterLib.bib
 csl: /home/mateus/Documents/citation_styles/elsevier-vancouver.csl
@@ -33,7 +34,7 @@ library(RefManageR)
 - [Is the staggeringly profitable business of scientific publishing bad for science? ](https://www.theguardian.com/science/2017/jun/27/profitable-business-scientific-publishing-bad-for-science)
   - Spoiler: it is
 
-### My take on the issue:
+## My take on the issue:
 
 1. [The Sovereign of Science](https://gmbernardoharrington.netlify.app/post/the-sovereign-of-science/)
   - Scientists are not incentivised to produce quality research
@@ -67,11 +68,13 @@ library(RefManageR)
 
 class: center, middle
 
+## Sounds great?
+
 ![Sounds great!](https://media.giphy.com/media/26tk03guzOxhjkL6w/giphy.gif)
 
 ---
 
-### So what's the problem you damn nerd?
+## So what's the problem you damn nerd?
 
 --
 
@@ -118,7 +121,7 @@ class: center, middle
   - Their inclusion changes the results significantly
 
 
-### So what could we use instead?
+## So what could we use instead?
 
 ]
 
@@ -137,17 +140,18 @@ class: center, middle
 ![](https://media.giphy.com/media/xT1XGzXhVgWRLN1Cco/giphy.gif)
 <br/>
 
-![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
+<!-- ![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif) -->
+<img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="80%"/>
 ]
 .pull-right[
 
-![](https://media.giphy.com/media/Wsju5zAb5kcOfxJV9i/giphy.gif)
-![](https://media.giphy.com/media/MdA16VIoXKKxNE8Stk/giphy.gif)
+<img src="https://media.giphy.com/media/Wsju5zAb5kcOfxJV9i/giphy.gif" width="60%"/>
+<img src="https://media.giphy.com/media/MdA16VIoXKKxNE8Stk/giphy.gif" width="60%"/>
 ]
 
 ---
 
-### Why a programming language?
+## Why a programming language?
 
 --
 
@@ -174,7 +178,7 @@ class: center, middle
 
 ---
 
-### And it makes you more employable!
+## And it makes you more employable!
 
 .center[![](https://media.giphy.com/media/xTiIzFiGj0C3RFKjHa/giphy.gif)]
 
@@ -236,7 +240,7 @@ class: center, middle
 ![](https://logz.io/wp-content/uploads/2016/03/github.png)
 ]
 .pull-right[
-```{r, out.width="80%", echo=FALSE}
+```{r, out.width="70%", echo=FALSE}
 knitr::include_graphics("https://cdn-images-1.medium.com/max/1600/1*j9hbjszo0zXS32yhvSkdAQ.jpeg")
 ```
 
@@ -244,7 +248,7 @@ knitr::include_graphics("https://cdn-images-1.medium.com/max/1600/1*j9hbjszo0zXS
 
 ---
 
-### Going even further down the rabbit hole
+## Going even further down the rabbit hole
 
 --
 
