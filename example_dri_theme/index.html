@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Example title that is kinda long</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Name" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="dri-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+name: test-title-slide
+class: title-slide
+
+# Example title that is&lt;br&gt;kinda long
+## Subtitle
+
+### &lt;span style="color:white;"&gt;Name&lt;/span&gt;
+### Position&lt;br&gt;Lab Group
+### 2022-02-04 (updated: 2022-02-07)
+
+---
+
+# Example slide
+
+Here is some text.
+The font is Arial &lt;span style="color:#00326e"&gt;(hex: #00326e)&lt;/span&gt;.
+Here is another sentence with **bold text**.
+Here is an example reference: ([Baker and Escott-Price, 2020](https://doi.org/10.3389/fdgth.2020.00014))
+
+.pull-left[
+- Here is a bullet point
+- The font used is Arial and font size is 18px
+- Bullets are coloured &lt;span style="color:#0ac8ff;"&gt;hex: #0ac8ff&lt;/span&gt;
+]
+
+.pull-right[
+&lt;img src="../logos/UK DRI Logos/UK DRI MONO/JPG/UK Dementia Research Institute_LOGO_MONO.jpg" width="80%" /&gt;
+]
+
+.centre[
+&lt;img src="../logos/UK DRI Logos/Founding Funders/UK DRI Founders_nostrapline_RGB.jpg" width="80%" /&gt;
+]
+
+---
+
+class: inverse
+
+# Inverted example slide
+
+Here is some text.
+The font is Arial &lt;span style="color:#00326e"&gt;(hex: #00326e)&lt;/span&gt;.
+Here is another sentence with **bold text**.
+Here is an example reference: ([Baker and Escott-Price, 2020](https://doi.org/10.3389/fdgth.2020.00014))
+
+.pull-left[
+- Here is a bullet point
+- The font used is Arial and font size is 18px
+- Bullets are coloured &lt;span style="color:#0ac8ff;"&gt;hex: #0ac8ff&lt;/span&gt;
+]
+
+.pull-right[
+&lt;img src="../logos/UK DRI Logos/UK DRI MONO/JPG/UK Dementia Research Institute_LOGO_MONO.jpg" width="80%" /&gt;
+]
+
+.centre[
+&lt;img src="../logos/UK DRI Logos/Founding Funders/UK DRI Founders_nostrapline_RGB.jpg" width="80%" /&gt;
+]
+
+---
+
+# Example with R code
+
+.pull-left[
+
+```r
+## load some data
+data(diamonds)
+
+## make a plot
+plot &lt;- ggplot(diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    theme_bw() +
+    scale_color_viridis_d()
+```
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/display-plot-1.png" width="80%" /&gt;
+]
+
+&lt;!-- define the final slide  --&gt;
+
+---
+
+class: final-slide
+
+# Thanks for listening
+
+&lt;br&gt;
+.left[
+&lt;div style="color:skyblue;"&gt;
+&lt;span style="color:white;"&gt;&lt;b&gt;Name&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+&lt;b&gt;Position&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Contact info&lt;/b&gt;
+&lt;/div&gt;
+
+]
+
+&lt;div class="row"&gt;
+  &lt;div class="column"&gt;
+    &lt;figure class="item"&gt;
+      &lt;img src="profile.png" style="width:100%"/&gt;
+      &lt;figcaption class="caption"&gt;Name&lt;br&gt;Position/Role&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+  &lt;div class="column"&gt;
+    &lt;figure class="item"&gt;
+      &lt;img src="profile.png" style="width:100%"/&gt;
+      &lt;figcaption class="caption"&gt;Name&lt;br&gt;Position/Role&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+  &lt;div class="column"&gt;
+    &lt;figure class="item"&gt;
+      &lt;img src="profile.png" style="width:100%"/&gt;
+      &lt;figcaption class="caption"&gt;Name&lt;br&gt;Position/Role&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+  &lt;div class="column" style="padding-right:300px;"&gt;
+    &lt;figure class="item"&gt;
+      &lt;img src="profile.png" style="width:100%"/&gt;
+      &lt;figcaption class="caption"&gt;Name&lt;br&gt;Position/Role&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+.testr[
+&lt;span style="color:white;"&gt;Collaborator institution&lt;/span&gt;&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;span style="color:white;"&gt;Collaborator institution&lt;/span&gt;&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+Name (Position/Role)&lt;br&gt;
+]
+
+ &lt;!--Use the following to add further logos to the title/final slide--&gt;
+ &lt;!--Adjust sizing in the CSS file--&gt;
+
+&lt;div class="title-logo-1"&gt;&lt;/div&gt;
+&lt;div class="title-logo-2"&gt;&lt;/div&gt;
+
+---
+
+# References
+
+&lt;a name=bib-baker_polygenic_2020&gt;&lt;/a&gt;[Baker, E. and V. Escott-Price](#cite-baker_polygenic_2020)
+(2020). "Polygenic Risk Scores in Alzheimer's Disease: Current Applications and Future Directions".
+In: _Frontiers in Digital Health_ 2, p. 14. ISSN: 2673-253X. DOI:
+[10.3389/fdgth.2020.00014](https://doi.org/10.3389%2Ffdgth.2020.00014).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(dri_logo.jpg);
+  /* is using inverted slide enable this option */
+  /* background-color: white; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30.8em;
+  right: 47.1em;
+  width: 210px;
+  height: 208px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)' +
+    ':not(.final-slide)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
