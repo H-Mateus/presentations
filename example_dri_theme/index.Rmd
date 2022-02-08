@@ -73,7 +73,7 @@ class: title-slide
 
 Here is some text.
 The font is Arial <span style="color:#00326e">(hex: #00326e)</span>.
-Here is another sentence with **bold text**.
+Here is another sentence with **bold** and *italic* text.
 Here is an example reference: `r AutoCite(bib, c("baker_polygenic_2020"))`
 
 .pull-left[
@@ -102,7 +102,7 @@ class: inverse
 
 Here is some text.
 The font is Arial <span style="color:#00326e">(hex: #00326e)</span>.
-Here is another sentence with **bold text**.
+Here is another sentence with **bold** and *italic* text.
 Here is an example reference: `r AutoCite(bib, c("baker_polygenic_2020"))`
 
 .pull-left[
@@ -125,10 +125,10 @@ knitr::include_graphics("../logos/UK DRI Logos/Founding Funders/UK DRI Founders_
 
 ---
 
-# Example with R code
+# Examples with R code: Plots
 
 .pull-left[
-```{r, label='example-code', highlight.output = TRUE, echo=TRUE}
+```{r, label='example-code-plot', highlight.output = TRUE, echo=TRUE}
 ## load some data
 data(diamonds)
 
@@ -145,6 +145,56 @@ plot <- ggplot(diamonds, aes(carat, price, colour = cut)) +
 print(plot)
 ```
 ]
+
+---
+
+# Examples with R code: Images
+
+```{r, label='example-code-image', echo=TRUE, out.width="80%"}
+knitr::include_graphics("../logos/UK DRI Logos/UK DRI MONO/JPG/UK Dementia Research Institute_LOGO_MONO.jpg")
+```
+
+---
+
+# Examples with R code: Tables
+
+```{r, label='example-code-table', highlight.output = TRUE, echo=TRUE}
+## print table
+kable(head(diamonds))
+```
+
+---
+
+# Examples with R code: HTML Widgets
+
+.centre[
+```{r, label='example-code-widgets-map', out.width='100%', fig.height=6, echo=TRUE}
+library(leaflet)
+leaflet() %>% addTiles() %>% setView(-0.1371784166832623, 51.52405283300594, zoom = 17)
+```
+]
+
+---
+
+# Examples with R code: HTML Widgets 2
+
+```{r, label='example-code-widgets-dt', highlight.output = TRUE, echo=TRUE}
+DT::datatable(head(iris, 10), fillContainer = FALSE,
+              options = list(pageLength = 6))
+```
+
+---
+
+# Example with R code: Math expressions
+
+You can write LaTeX math expressions inside a pair of dollar signs, e.g. `$\alpha+\beta$` renders $\alpha+\beta$.
+You can use the display style with double dollar signs:
+
+```
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
+```
+
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
 
 <!-- define the final slide  -->
 
