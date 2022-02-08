@@ -74,6 +74,7 @@ th, td { padding: 5px; }
     position: relative;
     top: -40px;
     font-family: Arial, sans-serif;
+    font-weight: normal;
 }
 
 /* set horizontal line under header */

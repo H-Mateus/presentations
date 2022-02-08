@@ -57,7 +57,7 @@ BibOptions(check.entries = FALSE,
 bib <- ReadBib("example.bib", check = FALSE)
 ```
 
-name: test-title-slide
+name: title-slide
 class: title-slide
 
 # Example title that is<br>kinda long
