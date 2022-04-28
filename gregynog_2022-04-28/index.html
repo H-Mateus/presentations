@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introductions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriel Mateus Bernardo Harrington" />
+    <script src="libs/header-attrs-2.13/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/d3-3.3.8/d3.min.js"></script>
+    <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+    <link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+    <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/chromatography-0.1/chromatography.js"></script>
+    <script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
+    <link rel="stylesheet" href="dri-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+name: title-slide
+class: title-slide
+
+# Introductions
+## &amp; where I'm at
+
+### &lt;span style="color:white;"&gt;Gabriel Mateus Bernardo Harrington&lt;/span&gt;
+### Research Associate&lt;br&gt;Rebecca Sims group
+### 2022-05-03 (updated: 2022-04-28)
+
+---
+
+# Background
+
+.pull-left[
+
+<div id="htmlwidget-6b3adf05715005bbe414" style="width:100%;height:504px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6b3adf05715005bbe414">{"x":{"diagram":"\ngraph TD\n    F-->A2\n    subgraph Pre-PhD 2016-18\n        A[BSc: Biological Sciences<br>- Lancaster University] -->|existential angst| B(Optogenetics in Cochlea implants<br>- Bionics institute, Melbourne)\n    end\n    subgraph Mini-project rotations 2018-19\n        B --> C(Center for Doctoral Training<br>- Regen medicine)\n        C -->|One| D[Gene expression in adherent<br>and non-adherent hydrogels<br>- Loughborough University]\n        C -->|Two| E[Effects of AC on interfacing wires<br>grown via wireless electrochemisty<br>- Nottingham University]\n        C -->|Three| F[Viability of 'lung on a chip' model<br>- Keele University]\n    end\n    subgraph PhD 2019-2022\n        A2[PhD: A multimodal approach to biomarker<br>discovery for spinal cord injury]-->B2[Here!]\n    end\n"},"evals":[],"jsHooks":[]}</script>
+
+]
+
+.pull-right[
+
+&lt;img src="images/lancaster_uni_logo.jpg" width="50%" /&gt;&lt;img src="images/cdt_site.png" width="50%" /&gt;
+
+]
+
+---
+
+# Cohort database
+
+.pull-left[
+
+- Series of cohorts Cardiff has been involved in recruiting
+- Rich phenotypic data
+  - Problem: data not in a structure very amenable to analysis
+  - Solution: create relational database to house data in a structure and well controllable manner
+    - Used the free and open-source [PostgreSQL](https://www.postgresql.org/)
+- General recommendations:
+  - Spreadsheets are rubbish
+  - Consider using relational databases for anything you actually care about, especially longer term projects and/or ones with lots of people inputting data
+
+]
+
+.pull-right[
+
+&lt;img src="images/postgresql.jpg" width="60%" /&gt;&lt;img src="https://media.giphy.com/media/Sb9KqeeymLlESGWZyE/giphy.gif" width="60%" /&gt;
+
+]
+
+---
+
+# Whole exsome sequence data
+
+.pull-left[
+
+- Inherited from Didi, she had done a lot of the initial file processing
+- Currently grappling with VCF file annotation via [Hail](https://hail.is/)
+- Sample IDs also not matching phenotype data very well, see previous point regarding spreadsheets being rubbish
+  - Building a lookup table, pending the remaining data coming from the field team
+- Data soon&amp;trade; (I hope)
+
+]
+.pull-right[
+
+&lt;img src="https://media.giphy.com/media/lkdH8FmImcGoylv3t3/giphy.gif" width="80%" /&gt;
+
+]
+
+---
+
+# Reproducible slides
+
+.pull-left[
+- I made a little R package with a template for making slideshows with the DRI theme via RMarkdown/[xaringan](https://github.com/yihui/xaringan)
+- Nice ability to easily host slides online, see some of my presentations [here](https://h-mateus.github.io/presentations/)
+- Package can be found in this GitHub repo: [H-Mateus/dri.xaringan.theme](https://github.com/H-Mateus/dri.xaringan.theme)
+- An example presentation using the DRI (in addition to what you're looking at) can be found [here](https://h-mateus.github.io/presentations/example_dri_theme/index.html#1)
+]
+
+.pull-right[
+&lt;img src="https://media.giphy.com/media/lTRuG1F4VZ3LHMpXY2/giphy.gif" width="70%" /&gt;
+]
+
+---
+
+class: final-slide
+
+# Thanks for listening
+
+&lt;br&gt;
+.left[
+&lt;div style="color:skyblue;"&gt;
+&lt;span style="color:white;"&gt;&lt;b&gt;Gabriel Mateus Bernardo Harrington&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+&lt;b&gt;Research Assocaite&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;&lt;/b&gt;
+&lt;/div&gt;
+
+]
+
+These slides can be found from the QR code below, or at this address:&lt;br&gt;[https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1](https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1)
+
+
+
+.pull-left[
+&lt;img src="images/slide_qr.png" width="50%" /&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(dri_logo.jpg);
+  /* is using inverted slide enable this option */
+  /* background-color: white; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30.8em;
+  right: 47.1em;
+  width: 210px;
+  height: 208px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)' +
+    ':not(.final-slide)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
