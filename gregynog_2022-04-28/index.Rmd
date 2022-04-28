@@ -98,7 +98,7 @@ graph TD
 
 .pull-right[
 
-```{r, label='life-history-imgs', out.width='50%'}
+```{r, label='life-history-imgs', out.width='60%'}
 knitr::include_graphics("images/lancaster_uni_logo.jpg")
 knitr::include_graphics("images/cdt_site.png")
 ```
