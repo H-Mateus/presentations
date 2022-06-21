@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Proteomics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriel Mateus Bernardo Harrington" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="dri-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+name: title-slide
+class: title-slide
+
+# Proteomics
+## A brief overview
+
+### &lt;span style="color:white;"&gt;Gabriel Mateus Bernardo Harrington&lt;/span&gt;
+### Research Associate&lt;br&gt;Sims Group
+### 2022-06-22 (updated: 2022-06-21)
+
+&lt;!--Use the following to add further logos to the title/final slide--&gt;
+&lt;!--Adjust sizing in the CSS file--&gt;
+
+&lt;div class="title-logo-1"&gt;&lt;/div&gt;
+&lt;div class="title-logo-2"&gt;&lt;/div&gt;
+
+---
+
+# Two high-level approaches
+
+### Top-down proteomics
+
+- Uses intact whole proteins
+- Limited to only a investigating a small number of predefined proteins
+- Good for looking at protein modifications (e.g. phosphorylations)
+
+### Bottom-up proteomics
+
+- Proteins are digested into peptides
+- Can be used to examination of protein subsets, but also for characterising the whole proteome
+
+Basic steps:
+ 1. Enzymatically digest proteins into peptides
+ 1. Sort the peptides using high-performance liquid chromatography
+ 1. Feed this into a mass spectrometer which fragments the peptides further and measures the mass/charge of the resulting fragments
+
+---
+
+.center[
+&lt;img src="images/bottom-up-proteomics.png" width="80%" /&gt;
+]
+
+???
+
+- we're using [S-TRAP](https://protifi.com/pages/s-trap) kit from a company called Protifi to prep the samples
+- It's a system for binding the proteins, allowing you to clean any contaminates, denature the proteins and digest them to peptides
+- trypsin cuts at lysine and arginine
+
+
+---
+
+# Mass resolution matters
+
+- Resolution is mass spectrometry relates to the width of a peak at a given hight (typically 50% peak height) .footnote[Image taken from: ([Eidhammer, Flikka, Martens, et al., 2007](https://doi.org/10.1002/9780470724309))]
+
+
+.center[
+&lt;img src="images/monoisotopic_peak.png" width="90%" /&gt;
+]
+
+???
+
+- use of isotopes to figure out charge - carbon 13, if next peak is +1m/z, then ion is plus one, if it's plus +2 then it'd be +0.5m/z
+- this can cause problems at larger masses as it becomes less likely there is a peak with no carbon 13
+
+---
+
+# Fragmentation ladders
+
+- Bonds are weaker between amino acids as opposed to within them, therefore the `\(b_i\)` and `\(y_i\)` fragments are of most interest
+
+.center[
+&lt;img src="images/fragmentation_ladder.png" width="90%" /&gt;
+]
+
+---
+
+# Interpretable ion ladder
+
+- Ideally, this is the sort of ladder we'd get... .footnote[Image taken from Lennart Martens presentation]
+
+.center[
+&lt;img src="images/ideal_ion_ladder.png" width="65%" /&gt;
+]
+
+---
+
+# Interpretable ion ladder
+
+- Realistically, this is the sort of ladder we get... .footnote[Image taken from Lennart Martens presentation]
+
+.center[
+&lt;img src="images/realistic_ion_ladder.png" width="65%" /&gt;
+]
+
+???
+
+- we get a range of potential sequences with different scores
+
+---
+
+# Peptide identification
+
+- ***De Novo* search**: sequence a peptide by building a graph of observed amino acid distances in a spectrum. Then find a path that explains the peptide mass and e.g., most of the observed peaks
+- **Spectral library matching**: compare against previously observed or predicted spectra
+- **Database search**: Generate theoretical spectra and compare against observed ones .footnote[Image taken from: ([Duncan, Aebersold, and Caprioli, 2010](https://doi.org/10.1038/nbt0710-659))]
+
+.center[
+&lt;img src="images/database_search.jpg" width="65%" /&gt;
+]
+
+???
+
+- you get multiple PSM scores for different matches returned, not just the best score
+- intensities aren't typically computed in the *in-silico* spectra, but there are modern methods that attempt this
+- there are also methods that try to predict retention time
+
+---
+
+# False discovery rates
+
+- Problem: there's uncertainty in matches, we need a means to quantify and correct for inaccurate matches
+- Solution: Create decoy sequences to match against to compute the ratio of false targets
+
+`$$FDR = \frac{\#decoys}{\#targets}$$`
+
+- Reversing sequences in database is a common way to make the decoys
+
+FDR from posterior error probabilities (PEP):
+- e.g. [PeptideProphet](http://proteinprophet.sourceforge.net/)
+- fit a mixture model (true hit / false hit) to score distributions
+
+Post-processing:
+- e.g. [Percolator](http://percolator.ms/): machine learning to discriminate between correct and incorrect PSMs
+- can improve results is score of individual spectra are not easily comparable (not well calibrated)
+
+---
+
+# Protein identification
+
+.center[
+&lt;img src="images/protein_identification.png" width="65%" /&gt;
+]
+
+.pull-right[Image taken from: ([Martens and Hermjakob, 2007](https://doi.org/10.1039/B705178F))]
+
+---
+
+# Data acquisition techniques
+
+- Parallel Reaction Monitoring (PRM): good for quantitation of pre-selected protein/s (succeeded MRM)
+- Data Dependent Acquisition (DDA): good for comprehensive detection of whole proteome
+- **Data Independent Acquisition (DIA): hybrid that aims to do both**
+
+.center[
+&lt;img src="images/data_acquisition_techniques.gif" width="65%" /&gt;
+]
+
+---
+
+class: final-slide
+
+# Thanks for listening
+
+&lt;br&gt;
+.left[
+&lt;div style="color:skyblue;"&gt;
+&lt;span style="color:white;"&gt;&lt;b&gt;Gabriel Mateus Bernardo Harrington&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+&lt;b&gt;Research Assocaite&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;&lt;/b&gt;
+&lt;/div&gt;
+
+]
+
+These slides can be found from the QR code below, or at this address:&lt;br&gt;[https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1](https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1)
+
+
+
+.pull-left[
+&lt;img src="images/slide_qr.png" width="50%" /&gt;
+]
+
+---
+
+## References
+
+&lt;a name=bib-duncan_pros_2010&gt;&lt;/a&gt;[Duncan, M. W., R. Aebersold, and R.
+M. Caprioli](#cite-duncan_pros_2010) (2010). "The Pros and Cons of
+Peptide-Centric Proteomics". In: _Nature Biotechnology_ 28.7, pp.
+659-664. ISSN: 1546-1696. DOI:
+[10.1038/nbt0710-659](https://doi.org/10.1038%2Fnbt0710-659).
+
+&lt;a name=bib-eidhammer_computational_2007&gt;&lt;/a&gt;[Eidhammer, I., K. Flikka,
+L. Martens, et al.](#cite-eidhammer_computational_2007) (2007).
+_Computational Methods for Mass Spectrometry Proteomics_. Chichester,
+UK: John Wiley &amp; Sons, Ltd. ISBN: 978-0-470-72430-9 978-0-470-51297-5.
+DOI: [10.1002/9780470724309](https://doi.org/10.1002%2F9780470724309).
+
+&lt;a name=bib-martens_proteomics_2007&gt;&lt;/a&gt;[Martens, L. and H.
+Hermjakob](#cite-martens_proteomics_2007) (2007). "Proteomics Data
+Validation: Why All Must Provide Data". In: _Molecular BioSystems_ 3.8,
+pp. 518-522. ISSN: 1742-2051. DOI:
+[10.1039/B705178F](https://doi.org/10.1039%2FB705178F).
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(dri_logo.jpg);
+  /* is using inverted slide enable this option */
+  /* background-color: white; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30.8em;
+  right: 47.1em;
+  width: 210px;
+  height: 208px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)' +
+    ':not(.final-slide)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
