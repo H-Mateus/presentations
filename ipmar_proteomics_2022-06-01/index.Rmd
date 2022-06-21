@@ -248,12 +248,12 @@ class: final-slide
 
 ]
 
-These slides can be found from the QR code below, or at this address:<br>[https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1](https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1)
+These slides can be found from the QR code below, or at this address:<br>[https://h-mateus.github.io/presentations/ipmar_proteomics_2022-06-01/index.html#1](https://h-mateus.github.io/presentations/ipmar_proteomics_2022-06-01/index.html#1)
 
 ```{r, make-qr-code, eval=FALSE}
 library(qrcode)
 png("images/slide_qr.png")
-x <- qr_code('https://h-mateus.github.io/presentations/gregynog_2022-04-28/index.html#1')
+x <- qr_code('https://h-mateus.github.io/presentations/ipmar_proteomics_2022-06-01/index.html#1')
 plot(x)
 dev.off()
 ```
