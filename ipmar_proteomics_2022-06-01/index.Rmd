@@ -220,6 +220,26 @@ knitr::include_graphics("images/protein_identification.png")
 
 ---
 
+# Complexity is linked to database
+
+.center[
+```{r, label='protein-identification-2', out.width='65%'}
+knitr::include_graphics("images/protein_id_proportions.png")
+```
+]
+
+.pull-right[Image taken from: `r AutoCite(bib, c("barsnes_crowdsourcing_2013"))`]
+
+---
+
+.center[
+```{r, label='protein-identification-3', out.width='75%'}
+knitr::include_graphics("images/protein_id_cartoon.png")
+```
+]
+
+---
+
 # Data acquisition techniques
 
 - Parallel Reaction Monitoring (PRM): good for quantitation of pre-selected protein/s (succeeded MRM)
@@ -229,6 +249,21 @@ knitr::include_graphics("images/protein_identification.png")
 .center[
 ```{r, label='data-acquisition-techniques', out.width='65%'}
 knitr::include_graphics("images/data_acquisition_techniques.gif")
+```
+]
+
+???
+
+- Can have targeted or untargeted DDA/DIA
+  - In targeted, use a inclusion list of peptides mass of interest
+
+---
+
+# Window width varies in DDA vs DIA
+
+.center[
+```{r, label='dia-vs-dda', out.width='75%'}
+knitr::include_graphics("images/dia_vs_dda_windows.png")
 ```
 ]
 
