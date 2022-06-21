@@ -53,7 +53,7 @@ BibOptions(check.entries = FALSE,
            style = "markdown",
            hyperlink = "to.doc",
            dashed = FALSE)
-## read bib file. trying to read masterlib causes R to crash, maybe file size or non-standard charaters
+## read bib file. trying to read masterlib causes R to crash, maybe file size or non-standard characters
 bib <- ReadBib("example.bib", check = FALSE)
 ```
 
