@@ -232,14 +232,6 @@ knitr::include_graphics("images/protein_id_proportions.png")
 
 ---
 
-.center[
-```{r, label='protein-identification-3', out.width='75%'}
-knitr::include_graphics("images/protein_id_cartoon.png")
-```
-]
-
----
-
 # Data acquisition techniques
 
 - Parallel Reaction Monitoring (PRM): good for quantitation of pre-selected protein/s (succeeded MRM)
@@ -264,6 +256,34 @@ knitr::include_graphics("images/data_acquisition_techniques.gif")
 .center[
 ```{r, label='dia-vs-dda', out.width='75%'}
 knitr::include_graphics("images/dia_vs_dda_windows.png")
+```
+]
+
+---
+
+# Nice example
+
+.center[
+```{r, label='dia-peptide-clean', out.width='55%'}
+knitr::include_graphics("images/dia_peptide_clean.png")
+```
+]
+
+---
+
+# Messy example
+
+.center[
+```{r, label='dia-peptide-messy', out.width='55%'}
+knitr::include_graphics("images/dia_peptide_messy.png")
+```
+]
+
+---
+
+.center[
+```{r, label='spectral-library', out.width='65%'}
+knitr::include_graphics("images/spectral_library.png")
 ```
 ]
 
