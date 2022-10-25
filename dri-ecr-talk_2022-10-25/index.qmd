@@ -25,7 +25,7 @@ bibliography: references.bib
 # options(knitr.kable.NA = '') #sets NAs in tables to be blank
 # options(knitr.table.format = "html")
 library(librarian)
-pkg <- c("tidyverse", "gt", "leaflet", "DT")
+pkg <- c("tidyverse", "gt", "leaflet", "DT", "qrcode")
 shelf(pkg)
 rm(pkg)
 ```
@@ -151,14 +151,26 @@ graph TD
 
 ## Thanks for listening {.final-slide background-image="title_background.png" style="color: #0ac8ff;"}
 
+```{r}
+#| eval: false
+png("images/qrcode.png")
+qrcode_gen("https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide")
+dev.off()
+```
+
 Any questions?
 
+-   Slides can be found at this link: <https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide>
+
 ::: columns
-::: {.column width="50%"}
-Slides can be found at this link:
+::: {.column width="40%"}
+-   Or scan this QR code:
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
+![](images/qrcode.png){width="50%"}
 :::
 
+::: {.column width="20%"}
+:::
 :::
