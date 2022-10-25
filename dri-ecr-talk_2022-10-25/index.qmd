@@ -1,0 +1,164 @@
+---
+title: "A life story in brief"
+subtitle: "ECR Forum"
+author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
+date: "2022-10-26<br>(Last modified: `r Sys.Date()`)"
+institute: "Research Assocaite<br>Williams lab"
+title-slide-attributes:
+  data-background-image: title_background.png
+  data-background-size: contain
+  #data-background-opacity: "0.5"
+  presentation-heading-color: #FFFFFF
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    logo: dri_logo.jpg
+csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouver.csl
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+#| include: false
+# knitr::opts_chunk$set(echo = FALSE, message = FALSE,
+#                       fig.showtext = TRUE, fig.retina = 3, warning = FALSE)
+# options(knitr.kable.NA = '') #sets NAs in tables to be blank
+# options(knitr.table.format = "html")
+library(librarian)
+pkg <- c("tidyverse", "gt", "leaflet", "DT")
+shelf(pkg)
+rm(pkg)
+```
+
+```{r}
+#| label: dri-hexcolours
+#| include: false
+dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
+                    "dark_grey" = "#415767", "sky_blue" = "#0ac8ff",
+                    "petrol_blue" = "007faf", "brigth_blue" = "4682ff",
+                    "cobalt" = "325ad7", "violet" = "#461e8c", "fuchsia" = "#fa2d6e",
+                    "ruby" = "#aa0050", "yellow" = "#ffed00")
+```
+
+## Origins
+
+```{r}
+leaflet() %>% 
+  addTiles() %>% 
+  setView(0.009821, 51.493367, zoom = 13)
+```
+
+::: notes
+-   I'm from London, Greenwich specifically
+
+-   It's a nice borough, you should visit
+:::
+
+## "Eductation"
+
+::: columns
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/brazil-flag.jpg)
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/lancaster-uni-logo.jpg)
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+:::
+
+::: columns
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/bionics-institute_logo.jpg)
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/EPSRC+logo.png)
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+:::
+
+## Adventures in a PhD
+
+```{mermaid}
+%%| fig-width: 7.5
+graph TD
+    F-->A2
+    subgraph Pre-PhD 2016-18
+        A[BSc: Biological Sciences<br>- Lancaster University] -->|existential angst| B(Optogenetics in Cochlea implants<br>- Bionics institute, Melbourne)
+    end
+    subgraph Mini-project rotations 2018-19
+        B --> C(Center for Doctoral Training<br>- Regen medicine)
+        C -->|One| D[Gene expression in adherent<br>and non-adherent hydrogels<br>- Loughborough University]
+        C -->|Two| E[Effects of AC on interfacing wires<br>grown via wireless electrochemisty<br>- Nottingham University]
+        C -->|Three| F[Viability of 'lung on a chip' model<br>- Keele University]
+    end
+    subgraph PhD 2019-2022
+        A2[PhD: A multimodal approach to biomarker<br>discovery for spinal cord injury]-->B2[Here!]
+    end
+```
+
+## And now I'm here
+
+![](https://media.giphy.com/media/xUPGcC3CMtnDrScvf2/giphy.gif)
+
+## One recommendation
+
+-   [Quarto®](https://quarto.org/) is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/)
+-   It's an excellent and versatile framework for reproducible and shareable articles, notes, presentations, websites, books (thesis!) and more
+-   I wrote my PhD thesis with the precursor to Quarto (RMarkdown - it was real helpful!)
+
+[![](images/quarto.png){fig-align="center"}](https://quarto.org/)
+
+## Some examples
+
+1.  [The FayLab Manual](https://thefaylab.github.io/lab-manual/)
+    -   This is a website aimed at new and current lab members which outlines the culture (inclusive, reproducible and open-science) the lab want to foster and codifies the structure of projects (e.g. file naming conventions!)
+2.  [My own website](https://gmbernardoharrington.netlify.app/blog/2022-10-21-testing-normality-in-r/)
+    -   A great way of sharing methods (especially for stats)
+
+## Thanks for listening {.final-slide background-image="title_background.png" style="color: #0ac8ff;"}
+
+Any questions?
+
+::: columns
+::: {.column width="50%"}
+Slides can be found at this link:
+:::
+
+::: {.column width="50%"}
+:::
+
+:::
