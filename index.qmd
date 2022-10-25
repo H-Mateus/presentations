@@ -1,0 +1,18 @@
+---
+format:
+  revealjs: 
+    theme: dark
+    footer: |
+      Author: [Gabriel Mateus Bernardo Harrington](https://gmbernardoharrington.netlify.app/)<br>
+      Last modified: 2022-10-25
+---
+
+## Presentations
+
+Presentation repository can be found [here](https://github.com/H-Mateus/presentations).
+
+- Current Presentations:
+    - [Cardiff DRI ECR - 2022](https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide)
+    - [IPMAR proteomics - 2022](ipmar_proteomics_2022-06-01/index.html)
+    - [Reproducible Research - CDT 2021](reproducible_research_2021-04-30/index.html)
+    - [IsCoS 2021 - Proteomic and bioinformatics analyses of plasma from SCI](iscos_sci_proteomics_2021-08-31/index.html)
