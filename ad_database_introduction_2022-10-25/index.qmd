@@ -1,0 +1,123 @@
+---
+title: "AD database"
+subtitle: "A brief introduction to the data"
+author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
+date: "2022-10-26<br>(Last modified: `r Sys.Date()`)"
+institute: "Research Assocaite<br>Williams lab"
+title-slide-attributes:
+  data-background-image: images/title_background.png
+  data-background-size: contain
+  #data-background-opacity: "0.5"
+  presentation-heading-color: #FFFFFF
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    logo: images/dri_logo.jpg
+    slide-number: c/t
+csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouver.csl
+execute: 
+  echo: true
+---
+
+## The data is stored in a [PostgreSQL](https://www.postgresql.org/) database
+
+-   Before we get into what data we have, you should know how it is stored
+-   [PostgreSQL](https://www.postgresql.org/) is an open-source relational database engine
+-   The data is stored in this was due to both it's abundance, and the fact that it was a bit of a mess...
+-   There is actually a single `.csv` file with all the data you could use if you wanted to, though I'd advice against this (it has nearly 4K rows and over 1K columns)
+
+## How could one access the data
+
+-   There're a few ways:
+    -   You could use SQL query to see what data is there and extract what you want for use in your analysis software of choice
+    -   You could use other software that can connect to the database, such as the GUI [dbeaver](https://dbeaver.io/), or certain R/Python packages that let you pull data straight into their respective environments
+    -   I'll showcase how to do this with R in later slides, and give you sense of the data whilst we're at it
+
+## Don't panic!
+
+::: columns
+::: {.column width="50%"}
+-   Rest assured, if you struggle with, or just don't fancy tackling the database yourself, I'm happy to assist with getting the data out into a plain-text format you can use
+-   Having said that, let's see how scary it might be :P
+:::
+
+::: {.column width="50%"}
+![](http://cdn2.bigcommerce.com/server2100/da4a7/products/489/images/119/Keep-Calm-and-Carry-On-Navy-Blue-Poster-Front__69597.1319984235.1280.1280.jpg?c=2){fig-align="center" width="70%"}
+:::
+:::
+
+## Connecting via R
+
+```{r}
+#| label: load-packages
+
+## I use librarian to both install/load packages
+library(librarian)
+pkg <- c("tidyverse", "RPostgreSQL", "janitor", "gt")
+shelf(pkg)
+rm(pkg)
+
+## then we need to build a connection object:
+## first, load the PostgreSQL driver
+drv <- dbDriver("PostgreSQL")
+## then define the connection parameters
+## note that "con" will be used later in each connection to the database
+con <- dbConnect(drv, dbname = "ad_phenotype_db",
+                 host = "localhost", port = 5432,
+                 user = "mateusbernardo-harrington")
+```
+
+## Testing the connection
+
+```{r}
+## the package has several helper functions we can use
+## for example, to list all the tables in the database:
+dbListTables(con)
+```
+
+## Extracting tables
+
+```{r}
+## we can pull a given table like so
+education_df <- dbReadTable(con, "education")
+gt(head(education_df))
+```
+
+## So what's actualy in the database?
+
+-   The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more
+-   Much of the data is longitudinal, with participants being revisited to get a sense of their trajectory
+-   We have several cohorts stretching back decades, so not all cohorts have the same information (different versions of a given cognitive assessment may have been used as newer versions were released for example)
+
+## What sort of questions might we explore?
+
+- Well there're loads we might ask!
+- But one aspect our group is particularly interest in, is comparing early- and late-onset (EOAD/LOAD) Alzheimer's disease
+- So, I would suggest that you could compare the trajectories of EOAD and LOAD participants in known risk factors (like low education, diabetes, hypertension, etc)
+- However, if there's a particular angle **you'd** be interested in tackling with this data, I'm very happy to discuss other ideas!
+
+## Thanks for your attention! {.final-slide background-image="images/title_background.png" style="color: #0ac8ff;"}
+
+```{r}
+#| eval: false
+#| echo: false
+png("images/qrcode.png")
+qrcode_gen("https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide")
+dev.off()
+```
+
+- I look forward to working with you!
+-   Slides can be found at this link: <https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide>
+
+::: columns
+::: {.column width="40%"}
+-   Or scan this QR code:
+:::
+
+::: {.column width="40%"}
+![](images/qrcode.png){width="50%"}
+:::
+
+::: {.column width="20%"}
+:::
+:::
