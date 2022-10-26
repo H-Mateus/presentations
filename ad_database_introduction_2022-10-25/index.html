@@ -395,16 +395,16 @@
 <ul>
 <li>Before we get into what data we have, you should know how it is stored</li>
 <li><a href="https://www.postgresql.org/">PostgreSQL</a> is an open-source relational database engine</li>
-<li>The data is stored in this was due to both it’s abundance, and the fact that it was a bit of a mess…</li>
-<li>There is actually a single <code>.csv</code> file with all the data you could use if you wanted to, though I’d advice against this (it has nearly 4K rows and over 1K columns)</li>
+<li>The data is stored in this due to both it’s abundance, and the fact that it was a bit of a mess…</li>
+<li>So the data was cleaned up and organised into discrete tables with linking IDs</li>
 </ul>
 </section>
 <section id="how-could-one-access-the-data" class="slide level2">
-<h2>How could one access the data</h2>
+<h2>How could one access the data?</h2>
 <ul>
 <li>There’re a few ways:
 <ul>
-<li>You could use SQL query to see what data is there and extract what you want for use in your analysis software of choice</li>
+<li>You could use SQL queries to see what data is there and extract what you want for use in your analysis software of choice</li>
 <li>You could use other software that can connect to the database, such as the GUI <a href="https://dbeaver.io/">dbeaver</a>, or certain R/Python packages that let you pull data straight into their respective environments</li>
 <li>I’ll showcase how to do this with R in later slides, and give you sense of the data whilst we’re at it</li>
 </ul></li>
@@ -432,7 +432,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">## I use librarian to both install/load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(librarian)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"RPostgreSQL"</span>, <span class="st">"janitor"</span>, <span class="st">"gt"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"RPostgreSQL"</span>, <span class="st">"janitor"</span>, <span class="st">"gt"</span>, <span class="st">"qrcode"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">shelf</span>(pkg)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">rm</span>(pkg)</span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
@@ -492,12 +492,12 @@
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">gt</span>(<span class="fu">head</span>(education_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="zesjuoqfnl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="htegprpwuj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zesjuoqfnl .gt_table {
+#htegprpwuj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -522,7 +522,7 @@
   border-left-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_heading {
+#htegprpwuj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -534,7 +534,7 @@
   border-right-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_title {
+#htegprpwuj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -546,7 +546,7 @@
   border-bottom-width: 0;
 }
 
-#zesjuoqfnl .gt_subtitle {
+#htegprpwuj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -558,13 +558,13 @@
   border-top-width: 0;
 }
 
-#zesjuoqfnl .gt_bottom_border {
+#htegprpwuj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_col_headings {
+#htegprpwuj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -579,7 +579,7 @@
   border-right-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_col_heading {
+#htegprpwuj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -599,7 +599,7 @@
   overflow-x: hidden;
 }
 
-#zesjuoqfnl .gt_column_spanner_outer {
+#htegprpwuj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -611,15 +611,15 @@
   padding-right: 4px;
 }
 
-#zesjuoqfnl .gt_column_spanner_outer:first-child {
+#htegprpwuj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zesjuoqfnl .gt_column_spanner_outer:last-child {
+#htegprpwuj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zesjuoqfnl .gt_column_spanner {
+#htegprpwuj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -631,7 +631,7 @@
   width: 100%;
 }
 
-#zesjuoqfnl .gt_group_heading {
+#htegprpwuj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +656,7 @@
   vertical-align: middle;
 }
 
-#zesjuoqfnl .gt_empty_group_heading {
+#htegprpwuj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -671,15 +671,15 @@
   vertical-align: middle;
 }
 
-#zesjuoqfnl .gt_from_md > :first-child {
+#htegprpwuj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zesjuoqfnl .gt_from_md > :last-child {
+#htegprpwuj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zesjuoqfnl .gt_row {
+#htegprpwuj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,7 +698,7 @@
   overflow-x: hidden;
 }
 
-#zesjuoqfnl .gt_stub {
+#htegprpwuj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,7 +711,7 @@
   padding-right: 5px;
 }
 
-#zesjuoqfnl .gt_stub_row_group {
+#htegprpwuj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,11 +725,11 @@
   vertical-align: top;
 }
 
-#zesjuoqfnl .gt_row_group_first td {
+#htegprpwuj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zesjuoqfnl .gt_summary_row {
+#htegprpwuj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -739,16 +739,16 @@
   padding-right: 5px;
 }
 
-#zesjuoqfnl .gt_first_summary_row {
+#htegprpwuj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_first_summary_row.thick {
+#htegprpwuj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zesjuoqfnl .gt_last_summary_row {
+#htegprpwuj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -758,7 +758,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_grand_summary_row {
+#htegprpwuj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -768,7 +768,7 @@
   padding-right: 5px;
 }
 
-#zesjuoqfnl .gt_first_grand_summary_row {
+#htegprpwuj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,11 +778,11 @@
   border-top-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_striped {
+#htegprpwuj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zesjuoqfnl .gt_table_body {
+#htegprpwuj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -791,7 +791,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_footnotes {
+#htegprpwuj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,7 +805,7 @@
   border-right-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_footnote {
+#htegprpwuj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -814,7 +814,7 @@
   padding-right: 5px;
 }
 
-#zesjuoqfnl .gt_sourcenotes {
+#htegprpwuj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -828,7 +828,7 @@
   border-right-color: #D3D3D3;
 }
 
-#zesjuoqfnl .gt_sourcenote {
+#htegprpwuj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -836,64 +836,64 @@
   padding-right: 5px;
 }
 
-#zesjuoqfnl .gt_left {
+#htegprpwuj .gt_left {
   text-align: left;
 }
 
-#zesjuoqfnl .gt_center {
+#htegprpwuj .gt_center {
   text-align: center;
 }
 
-#zesjuoqfnl .gt_right {
+#htegprpwuj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zesjuoqfnl .gt_font_normal {
+#htegprpwuj .gt_font_normal {
   font-weight: normal;
 }
 
-#zesjuoqfnl .gt_font_bold {
+#htegprpwuj .gt_font_bold {
   font-weight: bold;
 }
 
-#zesjuoqfnl .gt_font_italic {
+#htegprpwuj .gt_font_italic {
   font-style: italic;
 }
 
-#zesjuoqfnl .gt_super {
+#htegprpwuj .gt_super {
   font-size: 65%;
 }
 
-#zesjuoqfnl .gt_footnote_marks {
+#htegprpwuj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#zesjuoqfnl .gt_asterisk {
+#htegprpwuj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zesjuoqfnl .gt_indent_1 {
+#htegprpwuj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zesjuoqfnl .gt_indent_2 {
+#htegprpwuj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zesjuoqfnl .gt_indent_3 {
+#htegprpwuj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zesjuoqfnl .gt_indent_4 {
+#htegprpwuj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zesjuoqfnl .gt_indent_5 {
+#htegprpwuj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1045,6 +1045,502 @@
 </div>
 </div>
 </section>
+<section id="something-fancier" class="slide level2">
+<h2>Something fancier</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="do">## we can do something more fancy too, </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="do">## like join different tables using SQL queries</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="do">## we first need the query as a string</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>query <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">SELECT p.participant_id, p.case_control, p.early_or_late_onset_p, p.sex,</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="st">       e.d1_years_in_education</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="st">  FROM participant_info AS p</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">       JOIN visit AS v</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="st">           ON p.export_identifier = v.export_identifier</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">       JOIN education AS e</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="st">           ON v.visit_id = e.visit_id;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="st">"</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="do">## we can then save the query result as a dataframe</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>df <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="then-we-can-work-some-r-magic" class="slide level2">
+<h2>Then we can work some R magic!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">group_by</span>(early_or_late_onset_p) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">num =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">mean_years_in_education =</span> <span class="fu">mean</span>(d1_years_in_education, <span class="at">na.rm =</span> T)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="lbdnwmlpoq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#lbdnwmlpoq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lbdnwmlpoq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lbdnwmlpoq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lbdnwmlpoq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lbdnwmlpoq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lbdnwmlpoq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lbdnwmlpoq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lbdnwmlpoq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lbdnwmlpoq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lbdnwmlpoq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lbdnwmlpoq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lbdnwmlpoq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lbdnwmlpoq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbdnwmlpoq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lbdnwmlpoq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lbdnwmlpoq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbdnwmlpoq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lbdnwmlpoq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbdnwmlpoq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lbdnwmlpoq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbdnwmlpoq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lbdnwmlpoq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbdnwmlpoq .gt_left {
+  text-align: left;
+}
+
+#lbdnwmlpoq .gt_center {
+  text-align: center;
+}
+
+#lbdnwmlpoq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lbdnwmlpoq .gt_font_normal {
+  font-weight: normal;
+}
+
+#lbdnwmlpoq .gt_font_bold {
+  font-weight: bold;
+}
+
+#lbdnwmlpoq .gt_font_italic {
+  font-style: italic;
+}
+
+#lbdnwmlpoq .gt_super {
+  font-size: 65%;
+}
+
+#lbdnwmlpoq .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#lbdnwmlpoq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lbdnwmlpoq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lbdnwmlpoq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lbdnwmlpoq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lbdnwmlpoq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lbdnwmlpoq .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">early_or_late_onset_p</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">num</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">mean_years_in_education</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">EOAD</td>
+<td class="gt_row gt_right">270</td>
+<td class="gt_row gt_right">12.76226</td></tr>
+    <tr><td class="gt_row gt_left">EOAD &lt;65</td>
+<td class="gt_row gt_right">66</td>
+<td class="gt_row gt_right">12.39394</td></tr>
+    <tr><td class="gt_row gt_left">EOAD &lt;65,LOAD &gt;65</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">12.00000</td></tr>
+    <tr><td class="gt_row gt_left">LOAD</td>
+<td class="gt_row gt_right">160</td>
+<td class="gt_row gt_right">12.60377</td></tr>
+    <tr><td class="gt_row gt_left">LOAD &gt;65</td>
+<td class="gt_row gt_right">688</td>
+<td class="gt_row gt_right">10.31541</td></tr>
+    <tr><td class="gt_row gt_left">NA</td>
+<td class="gt_row gt_right">2640</td>
+<td class="gt_row gt_right">12.10916</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="or-make-a-nice-plot" class="slide level2">
+<h2>Or make a nice plot</h2>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(case_control <span class="sc">==</span> <span class="st">"AD case"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(case_control, d1_years_in_education,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>               <span class="at">fill =</span> early_or_late_onset_p)) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="fu">geom_violin</span>(<span class="at">draw_quantiles =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="do">## set colourblind friendly palette</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"PiYG"</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="fu">xlab</span>(<span class="st">"Cohort"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="fu">ylab</span>(<span class="st">"Years in education"</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>          <span class="at">legend.direction =</span> <span class="st">"horizontal"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Onset"</span>, <span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">"Years in education by cohort - "</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>                                          <span class="fu">Sys.Date</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="672" class="r-stretch quarto-figure-center"></section>
 <section id="so-whats-actualy-in-the-database" class="slide level2">
 <h2>So what’s actualy in the database?</h2>
 <ul>
@@ -1069,7 +1565,7 @@
 </div>
 <ul>
 <li>I look forward to working with you!</li>
-<li>Slides can be found at this link: <a href="https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide" class="uri">https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide</a></li>
+<li>Slides can be found at this link: <a href="https://h-mateus.github.io/presentations/ad_database_introduction_2022-10-25/#/title-slide" class="uri">https://h-mateus.github.io/presentations/ad_database_introduction_2022-10-25/#/title-slide</a></li>
 </ul>
 <div class="columns">
 <div class="column" style="width:40%;">

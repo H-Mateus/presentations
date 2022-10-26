@@ -23,13 +23,13 @@ execute:
 
 -   Before we get into what data we have, you should know how it is stored
 -   [PostgreSQL](https://www.postgresql.org/) is an open-source relational database engine
--   The data is stored in this was due to both it's abundance, and the fact that it was a bit of a mess...
--   There is actually a single `.csv` file with all the data you could use if you wanted to, though I'd advice against this (it has nearly 4K rows and over 1K columns)
+-   The data is stored in this due to both it's abundance, and the fact that it was a bit of a mess...
+-   So the data was cleaned up and organised into discrete tables with linking IDs
 
-## How could one access the data
+## How could one access the data?
 
 -   There're a few ways:
-    -   You could use SQL query to see what data is there and extract what you want for use in your analysis software of choice
+    -   You could use SQL queries to see what data is there and extract what you want for use in your analysis software of choice
     -   You could use other software that can connect to the database, such as the GUI [dbeaver](https://dbeaver.io/), or certain R/Python packages that let you pull data straight into their respective environments
     -   I'll showcase how to do this with R in later slides, and give you sense of the data whilst we're at it
 
@@ -53,7 +53,7 @@ execute:
 
 ## I use librarian to both install/load packages
 library(librarian)
-pkg <- c("tidyverse", "RPostgreSQL", "janitor", "gt")
+pkg <- c("tidyverse", "RPostgreSQL", "janitor", "gt", "qrcode")
 shelf(pkg)
 rm(pkg)
 
@@ -83,6 +83,61 @@ education_df <- dbReadTable(con, "education")
 gt(head(education_df))
 ```
 
+## Something fancier
+
+```{r}
+## we can do something more fancy too, 
+## like join different tables using SQL queries
+
+## we first need the query as a string
+query <- "
+SELECT p.participant_id, p.case_control, p.early_or_late_onset_p, p.sex,
+       e.d1_years_in_education
+  FROM participant_info AS p
+       JOIN visit AS v
+           ON p.export_identifier = v.export_identifier
+       JOIN education AS e
+           ON v.visit_id = e.visit_id;
+"
+## we can then save the query result as a dataframe
+df <- dbGetQuery(con, query)
+```
+
+## Then we can work some R magic!
+
+```{r}
+df %>%
+  group_by(early_or_late_onset_p) %>%
+  summarise(
+    num = n(),
+    mean_years_in_education = mean(d1_years_in_education, na.rm = T)
+  ) %>%
+  gt()
+```
+
+## Or make a nice plot
+
+```{r}
+#| code-fold: true
+#| fig-width: 7
+#| fig-align: center
+df %>%
+    dplyr::filter(case_control == "AD case") %>%
+    ggplot(aes(case_control, d1_years_in_education,
+               fill = early_or_late_onset_p)) +
+    geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+    ## set colourblind friendly palette
+    scale_fill_brewer(palette = "PiYG") +
+    xlab("Cohort") +
+    ylab("Years in education") +
+    theme_bw() +
+    theme(legend.position = "top",
+          legend.direction = "horizontal") +
+    labs(fill = "Onset", caption = paste0("Years in education by cohort - ",
+                                          Sys.Date()))
+```
+
+
 ## So what's actualy in the database?
 
 -   The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more
@@ -102,12 +157,12 @@ gt(head(education_df))
 #| eval: false
 #| echo: false
 png("images/qrcode.png")
-qrcode_gen("https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide")
+qrcode_gen("https://h-mateus.github.io/presentations/ad_database_introduction_2022-10-25/#/title-slide")
 dev.off()
 ```
 
 - I look forward to working with you!
--   Slides can be found at this link: <https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide>
+-   Slides can be found at this link: <https://h-mateus.github.io/presentations/ad_database_introduction_2022-10-25/#/title-slide>
 
 ::: columns
 ::: {.column width="40%"}
