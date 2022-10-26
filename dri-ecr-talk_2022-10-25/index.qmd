@@ -3,7 +3,7 @@ title: "A life story in brief"
 subtitle: "ECR Forum"
 author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
 date: "2022-10-26<br>(Last modified: `r Sys.Date()`)"
-institute: "Research Assocaite<br>Williams lab"
+institute: "Research Associate<br>Williams lab"
 title-slide-attributes:
   data-background-image: title_background.png
   data-background-size: contain
@@ -13,6 +13,7 @@ format:
   revealjs: 
     theme: [default, custom.scss]
     logo: dri_logo.jpg
+    slide-number: c/t
 csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouver.csl
 bibliography: references.bib
 ---
