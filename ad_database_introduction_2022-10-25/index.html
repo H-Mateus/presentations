@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-0.9.629">
 
   <meta name="author" content="Gabriel Mateus Bernardo Harrington">
-  <title>AD database</title>
+  <title>Alzheimer’s disease database</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -383,13 +383,46 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="images/title_background.png" data-background-size="contain" presentation-heading-color="" class="center">
-  <h1 class="title">AD database</h1>
+  <h1 class="title">Alzheimer’s disease database</h1>
   <p class="subtitle">A brief introduction to the data</p>
   <p class="author"><span style="color:white;">Gabriel Mateus Bernardo Harrington</span></p>
-  <p class="institute">Research Assocaite<br>Williams lab</p>
+  <p class="institute">Research Associate<br>Williams lab</p>
   <p class="date">2022-10-26<br>(Last modified: 2022-10-26)</p>
 </section>
 
+<section id="what-is-alzhimers-disease-ad" class="slide level2">
+<h2>What is Alzhimer’s disease (AD)?</h2>
+<ul>
+<li><a href="https://www.alzheimers.org.uk/about-dementia/types-dementia/alzheimers-disease">AD</a> is the most common form of dementia</li>
+<li>Dementia is the name for a set of symptoms that includes memory loss and difficulties with thinking, problem-solving or language</li>
+<li>The underlying cause of AD is currently unknown, but we know that AD brains accumulate protein deposits that form ‘plaques’ and ‘tangles’</li>
+<li>Importantly, AD is a progressive disease, meaning more symptoms develop, and they get worse, over time</li>
+</ul>
+</section>
+<section id="whats-this-database-lark-then" class="slide level2">
+<h2>What’s this database lark then?</h2>
+<ul>
+<li>Cardiff University has collected many projects with various funders resulting in different cohorts of data relating to dementia (mainly AD) over several decades</li>
+<li>These cohorts have been collated together into a single database, so that we can better leverage the data for analysis</li>
+</ul>
+</section>
+<section id="so-whats-actually-in-the-database" class="slide level2">
+<h2>So what’s actually in the database?</h2>
+<ul>
+<li>The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more</li>
+<li>Much of the data is longitudinal, with participants being revisited to get a sense of their trajectory</li>
+<li>We have several cohorts stretching back decades, so not all cohorts have the same information (different versions of a given cognitive assessment may have been used as newer versions were released for example)</li>
+</ul>
+</section>
+<section id="what-sort-of-questions-might-we-explore-with-it" class="slide level2">
+<h2>What sort of questions might we explore with it?</h2>
+<ul>
+<li>Well there’re loads we might ask!</li>
+<li>But one aspect our group is particularly interest in, is comparing early- and late-onset (EOAD/LOAD) Alzheimer’s disease</li>
+<li>So, I would suggest that you could compare the trajectories of EOAD and LOAD participants in known risk factors (like low education, diabetes, hypertension, etc)</li>
+<li>However, if there’s a particular angle <strong>you’d</strong> be interested in tackling with this data, I’m very happy to discuss other ideas!</li>
+</ul>
+</section>
 <section id="the-data-is-stored-in-a-postgresql-database" class="slide level2">
 <h2>The data is stored in a <a href="https://www.postgresql.org/">PostgreSQL</a> database</h2>
 <ul>
@@ -492,12 +525,12 @@
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">gt</span>(<span class="fu">head</span>(education_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="htegprpwuj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nhjmxpsngp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#htegprpwuj .gt_table {
+#nhjmxpsngp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -522,7 +555,7 @@
   border-left-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_heading {
+#nhjmxpsngp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -534,7 +567,7 @@
   border-right-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_title {
+#nhjmxpsngp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -546,7 +579,7 @@
   border-bottom-width: 0;
 }
 
-#htegprpwuj .gt_subtitle {
+#nhjmxpsngp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -558,13 +591,13 @@
   border-top-width: 0;
 }
 
-#htegprpwuj .gt_bottom_border {
+#nhjmxpsngp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_col_headings {
+#nhjmxpsngp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -579,7 +612,7 @@
   border-right-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_col_heading {
+#nhjmxpsngp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -599,7 +632,7 @@
   overflow-x: hidden;
 }
 
-#htegprpwuj .gt_column_spanner_outer {
+#nhjmxpsngp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -611,15 +644,15 @@
   padding-right: 4px;
 }
 
-#htegprpwuj .gt_column_spanner_outer:first-child {
+#nhjmxpsngp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#htegprpwuj .gt_column_spanner_outer:last-child {
+#nhjmxpsngp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#htegprpwuj .gt_column_spanner {
+#nhjmxpsngp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -631,7 +664,7 @@
   width: 100%;
 }
 
-#htegprpwuj .gt_group_heading {
+#nhjmxpsngp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +689,7 @@
   vertical-align: middle;
 }
 
-#htegprpwuj .gt_empty_group_heading {
+#nhjmxpsngp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -671,15 +704,15 @@
   vertical-align: middle;
 }
 
-#htegprpwuj .gt_from_md > :first-child {
+#nhjmxpsngp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#htegprpwuj .gt_from_md > :last-child {
+#nhjmxpsngp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#htegprpwuj .gt_row {
+#nhjmxpsngp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,7 +731,7 @@
   overflow-x: hidden;
 }
 
-#htegprpwuj .gt_stub {
+#nhjmxpsngp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,7 +744,7 @@
   padding-right: 5px;
 }
 
-#htegprpwuj .gt_stub_row_group {
+#nhjmxpsngp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,11 +758,11 @@
   vertical-align: top;
 }
 
-#htegprpwuj .gt_row_group_first td {
+#nhjmxpsngp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#htegprpwuj .gt_summary_row {
+#nhjmxpsngp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -739,16 +772,16 @@
   padding-right: 5px;
 }
 
-#htegprpwuj .gt_first_summary_row {
+#nhjmxpsngp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_first_summary_row.thick {
+#nhjmxpsngp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#htegprpwuj .gt_last_summary_row {
+#nhjmxpsngp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -758,7 +791,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_grand_summary_row {
+#nhjmxpsngp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -768,7 +801,7 @@
   padding-right: 5px;
 }
 
-#htegprpwuj .gt_first_grand_summary_row {
+#nhjmxpsngp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,11 +811,11 @@
   border-top-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_striped {
+#nhjmxpsngp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#htegprpwuj .gt_table_body {
+#nhjmxpsngp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -791,7 +824,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_footnotes {
+#nhjmxpsngp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,7 +838,7 @@
   border-right-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_footnote {
+#nhjmxpsngp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -814,7 +847,7 @@
   padding-right: 5px;
 }
 
-#htegprpwuj .gt_sourcenotes {
+#nhjmxpsngp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -828,7 +861,7 @@
   border-right-color: #D3D3D3;
 }
 
-#htegprpwuj .gt_sourcenote {
+#nhjmxpsngp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -836,64 +869,64 @@
   padding-right: 5px;
 }
 
-#htegprpwuj .gt_left {
+#nhjmxpsngp .gt_left {
   text-align: left;
 }
 
-#htegprpwuj .gt_center {
+#nhjmxpsngp .gt_center {
   text-align: center;
 }
 
-#htegprpwuj .gt_right {
+#nhjmxpsngp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#htegprpwuj .gt_font_normal {
+#nhjmxpsngp .gt_font_normal {
   font-weight: normal;
 }
 
-#htegprpwuj .gt_font_bold {
+#nhjmxpsngp .gt_font_bold {
   font-weight: bold;
 }
 
-#htegprpwuj .gt_font_italic {
+#nhjmxpsngp .gt_font_italic {
   font-style: italic;
 }
 
-#htegprpwuj .gt_super {
+#nhjmxpsngp .gt_super {
   font-size: 65%;
 }
 
-#htegprpwuj .gt_footnote_marks {
+#nhjmxpsngp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#htegprpwuj .gt_asterisk {
+#nhjmxpsngp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#htegprpwuj .gt_indent_1 {
+#nhjmxpsngp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#htegprpwuj .gt_indent_2 {
+#nhjmxpsngp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#htegprpwuj .gt_indent_3 {
+#nhjmxpsngp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#htegprpwuj .gt_indent_4 {
+#nhjmxpsngp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#htegprpwuj .gt_indent_5 {
+#nhjmxpsngp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1077,12 +1110,12 @@
 <span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="lbdnwmlpoq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vuzarkpabj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lbdnwmlpoq .gt_table {
+#vuzarkpabj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1107,7 +1140,7 @@
   border-left-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_heading {
+#vuzarkpabj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1119,7 +1152,7 @@
   border-right-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_title {
+#vuzarkpabj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1131,7 +1164,7 @@
   border-bottom-width: 0;
 }
 
-#lbdnwmlpoq .gt_subtitle {
+#vuzarkpabj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1143,13 +1176,13 @@
   border-top-width: 0;
 }
 
-#lbdnwmlpoq .gt_bottom_border {
+#vuzarkpabj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_col_headings {
+#vuzarkpabj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1164,7 +1197,7 @@
   border-right-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_col_heading {
+#vuzarkpabj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1184,7 +1217,7 @@
   overflow-x: hidden;
 }
 
-#lbdnwmlpoq .gt_column_spanner_outer {
+#vuzarkpabj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1196,15 +1229,15 @@
   padding-right: 4px;
 }
 
-#lbdnwmlpoq .gt_column_spanner_outer:first-child {
+#vuzarkpabj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbdnwmlpoq .gt_column_spanner_outer:last-child {
+#vuzarkpabj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbdnwmlpoq .gt_column_spanner {
+#vuzarkpabj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1216,7 +1249,7 @@
   width: 100%;
 }
 
-#lbdnwmlpoq .gt_group_heading {
+#vuzarkpabj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1241,7 +1274,7 @@
   vertical-align: middle;
 }
 
-#lbdnwmlpoq .gt_empty_group_heading {
+#vuzarkpabj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1256,15 +1289,15 @@
   vertical-align: middle;
 }
 
-#lbdnwmlpoq .gt_from_md > :first-child {
+#vuzarkpabj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbdnwmlpoq .gt_from_md > :last-child {
+#vuzarkpabj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbdnwmlpoq .gt_row {
+#vuzarkpabj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1283,7 +1316,7 @@
   overflow-x: hidden;
 }
 
-#lbdnwmlpoq .gt_stub {
+#vuzarkpabj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1296,7 +1329,7 @@
   padding-right: 5px;
 }
 
-#lbdnwmlpoq .gt_stub_row_group {
+#vuzarkpabj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1310,11 +1343,11 @@
   vertical-align: top;
 }
 
-#lbdnwmlpoq .gt_row_group_first td {
+#vuzarkpabj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbdnwmlpoq .gt_summary_row {
+#vuzarkpabj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1324,16 +1357,16 @@
   padding-right: 5px;
 }
 
-#lbdnwmlpoq .gt_first_summary_row {
+#vuzarkpabj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_first_summary_row.thick {
+#vuzarkpabj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbdnwmlpoq .gt_last_summary_row {
+#vuzarkpabj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1343,7 +1376,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_grand_summary_row {
+#vuzarkpabj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1353,7 +1386,7 @@
   padding-right: 5px;
 }
 
-#lbdnwmlpoq .gt_first_grand_summary_row {
+#vuzarkpabj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1363,11 +1396,11 @@
   border-top-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_striped {
+#vuzarkpabj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbdnwmlpoq .gt_table_body {
+#vuzarkpabj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1376,7 +1409,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_footnotes {
+#vuzarkpabj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1390,7 +1423,7 @@
   border-right-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_footnote {
+#vuzarkpabj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1399,7 +1432,7 @@
   padding-right: 5px;
 }
 
-#lbdnwmlpoq .gt_sourcenotes {
+#vuzarkpabj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1413,7 +1446,7 @@
   border-right-color: #D3D3D3;
 }
 
-#lbdnwmlpoq .gt_sourcenote {
+#vuzarkpabj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1421,64 +1454,64 @@
   padding-right: 5px;
 }
 
-#lbdnwmlpoq .gt_left {
+#vuzarkpabj .gt_left {
   text-align: left;
 }
 
-#lbdnwmlpoq .gt_center {
+#vuzarkpabj .gt_center {
   text-align: center;
 }
 
-#lbdnwmlpoq .gt_right {
+#vuzarkpabj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbdnwmlpoq .gt_font_normal {
+#vuzarkpabj .gt_font_normal {
   font-weight: normal;
 }
 
-#lbdnwmlpoq .gt_font_bold {
+#vuzarkpabj .gt_font_bold {
   font-weight: bold;
 }
 
-#lbdnwmlpoq .gt_font_italic {
+#vuzarkpabj .gt_font_italic {
   font-style: italic;
 }
 
-#lbdnwmlpoq .gt_super {
+#vuzarkpabj .gt_super {
   font-size: 65%;
 }
 
-#lbdnwmlpoq .gt_footnote_marks {
+#vuzarkpabj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lbdnwmlpoq .gt_asterisk {
+#vuzarkpabj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbdnwmlpoq .gt_indent_1 {
+#vuzarkpabj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbdnwmlpoq .gt_indent_2 {
+#vuzarkpabj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbdnwmlpoq .gt_indent_3 {
+#vuzarkpabj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbdnwmlpoq .gt_indent_4 {
+#vuzarkpabj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbdnwmlpoq .gt_indent_5 {
+#vuzarkpabj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1541,23 +1574,6 @@
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="672" class="r-stretch quarto-figure-center"></section>
-<section id="so-whats-actualy-in-the-database" class="slide level2">
-<h2>So what’s actualy in the database?</h2>
-<ul>
-<li>The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more</li>
-<li>Much of the data is longitudinal, with participants being revisited to get a sense of their trajectory</li>
-<li>We have several cohorts stretching back decades, so not all cohorts have the same information (different versions of a given cognitive assessment may have been used as newer versions were released for example)</li>
-</ul>
-</section>
-<section id="what-sort-of-questions-might-we-explore" class="slide level2">
-<h2>What sort of questions might we explore?</h2>
-<ul>
-<li>Well there’re loads we might ask!</li>
-<li>But one aspect our group is particularly interest in, is comparing early- and late-onset (EOAD/LOAD) Alzheimer’s disease</li>
-<li>So, I would suggest that you could compare the trajectories of EOAD and LOAD participants in known risk factors (like low education, diabetes, hypertension, etc)</li>
-<li>However, if there’s a particular angle <strong>you’d</strong> be interested in tackling with this data, I’m very happy to discuss other ideas!</li>
-</ul>
-</section>
 <section id="thanks-for-your-attention" class="slide level2 final-slide" data-background-image="images/title_background.png" style="color: #0ac8ff;">
 <h2>Thanks for your attention!</h2>
 <div class="cell">

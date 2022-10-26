@@ -1,9 +1,9 @@
 ---
-title: "AD database"
+title: "Alzheimer's disease database"
 subtitle: "A brief introduction to the data"
 author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
 date: "2022-10-26<br>(Last modified: `r Sys.Date()`)"
-institute: "Research Assocaite<br>Williams lab"
+institute: "Research Associate<br>Williams lab"
 title-slide-attributes:
   data-background-image: images/title_background.png
   data-background-size: contain
@@ -18,6 +18,31 @@ csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouv
 execute: 
   echo: true
 ---
+
+## What is Alzhimer's disease (AD)?
+
+- [AD](https://www.alzheimers.org.uk/about-dementia/types-dementia/alzheimers-disease) is the most common form of dementia
+- Dementia is the name for a set of symptoms that includes memory loss and difficulties with thinking, problem-solving or language
+- The underlying cause of AD is currently unknown, but we know that AD brains accumulate protein deposits that form 'plaques' and 'tangles'
+- Importantly, AD is a progressive disease, meaning more symptoms develop, and they get worse, over time
+
+## What's this database lark then?
+
+- Cardiff University has collected many projects with various funders resulting in different cohorts of data relating to dementia (mainly AD) over several decades
+- These cohorts have been collated together into a single database, so that we can better leverage the data for analysis
+
+## So what's actually in the database?
+
+-   The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more
+-   Much of the data is longitudinal, with participants being revisited to get a sense of their trajectory
+-   We have several cohorts stretching back decades, so not all cohorts have the same information (different versions of a given cognitive assessment may have been used as newer versions were released for example)
+
+## What sort of questions might we explore with it?
+
+- Well there're loads we might ask!
+- But one aspect our group is particularly interest in, is comparing early- and late-onset (EOAD/LOAD) Alzheimer's disease
+- So, I would suggest that you could compare the trajectories of EOAD and LOAD participants in known risk factors (like low education, diabetes, hypertension, etc)
+- However, if there's a particular angle **you'd** be interested in tackling with this data, I'm very happy to discuss other ideas!
 
 ## The data is stored in a [PostgreSQL](https://www.postgresql.org/) database
 
@@ -137,19 +162,6 @@ df %>%
                                           Sys.Date()))
 ```
 
-
-## So what's actualy in the database?
-
--   The data is from interviews and includes a variety of cognitive assessments, education/employment, family history of dementia, medications/co-morbidities and more
--   Much of the data is longitudinal, with participants being revisited to get a sense of their trajectory
--   We have several cohorts stretching back decades, so not all cohorts have the same information (different versions of a given cognitive assessment may have been used as newer versions were released for example)
-
-## What sort of questions might we explore?
-
-- Well there're loads we might ask!
-- But one aspect our group is particularly interest in, is comparing early- and late-onset (EOAD/LOAD) Alzheimer's disease
-- So, I would suggest that you could compare the trajectories of EOAD and LOAD participants in known risk factors (like low education, diabetes, hypertension, etc)
-- However, if there's a particular angle **you'd** be interested in tackling with this data, I'm very happy to discuss other ideas!
 
 ## Thanks for your attention! {.final-slide background-image="images/title_background.png" style="color: #0ac8ff;"}
 
