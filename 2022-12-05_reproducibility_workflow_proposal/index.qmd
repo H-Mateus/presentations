@@ -100,9 +100,9 @@ dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
 
 ## Write up and publish
 
--   Write up paper and publish as normal (ideally avoiding for-profit journals, and sticking to [diamond open access](https://en.wikipedia.org/wiki/Diamond_open_access)
+-   Write up paper and publish as normal (ideally avoiding for-profit journals, and sticking to [diamond open access](https://en.wikipedia.org/wiki/Diamond_open_access))
 -   Share raw data either on GitHub repo, or provide links to location on other repositories (and ideally pre-processed data)
--   Provide container with computational environment used for analysis
+-   Provide container with computational environment used for analysis ([Docker](https://www.docker.com/)(/[Singularity](https://docs.sylabs.io/guides/latest/user-guide/))
 
 <!-- define the final slide  -->
 
@@ -113,13 +113,13 @@ Any feedback or suggestions welcome!
 ```{r}
 #| eval: false
 png("images/qrcode.png")
-qrcode_gen("https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide")
+qrcode_gen("https://h-mateus.github.io/presentations/2022-12-05_reproducibility_workflow_proposal/")
 dev.off()
 ```
 
 Any questions?
 
--   Slides can be found at this link: <https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide>
+-   Slides can be found at this link: <https://h-mateus.github.io/presentations/2022-12-05_reproducibility_workflow_proposal/>
 
 ::: columns
 ::: {.column width="40%"}
