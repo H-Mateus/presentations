@@ -1,0 +1,150 @@
+---
+title: "Reproducible workflows"
+subtitle: 'A proposal to turn ideals into action'
+author: '<a href="https://gmbernardoharrington.netlify.app/" style="color: #fa2d6e">Gabriel Mateus Bernardo Harrington</a>'
+date: '2022-12-13'
+date-modified: '`r Sys.Date()`'
+date-format: iso
+institute: 'Research Associate | Williams Group'
+format: ukdri-revealjs
+incremental: true
+embed-resources: true
+footer: |
+  [Gabriel Mateus Bernardo Harrington](https://gmbernardoharrington.netlify.app/) 
+  - Source code on [GitHub](https://github.com/H-Mateus/quarto-ukdri-theme)
+  - [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) license.
+bibliography: [references.bib, packages.bib]
+nocite: |
+  @*
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(librarian)
+pkg <- c("knitr", "qrcode")
+shelf(pkg)
+
+# create a bib file of packages to cite them
+knitr::write_bib(c(.packages(), pkg), "packages.bib")
+rm(pkg)
+```
+
+```{r}
+#| label: dri-hexcolours
+#| include: false
+dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
+                    "dark_grey" = "#415767", "sky_blue" = "#0ac8ff",
+                    "petrol_blue" = "007faf", "brigth_blue" = "4682ff",
+                    "cobalt" = "325ad7", "violet" = "#461e8c", "fuchsia" = "#fa2d6e",
+                    "ruby" = "#aa0050", "yellow" = "#ffed00")
+```
+
+## Most science is bad
+
+::: columns
+::: column
+[![](images/41586_2016_BF533452a_Figf_HTML.webp)](https://www.nature.com/articles/533452a)
+:::
+
+::: column
+[![](images/factors_contributing_to_poor_research.webp)](https://www.nature.com/articles/533452a)
+:::
+:::
+
+::: footer
+[@baker2016]
+:::
+
+::: notes
+-   p-hacking
+-   HAWKing
+:::
+
+## Thanks to bad incentives
+
+> "Today I wouldn't get an academic job. It's as simple as that. I don't think I would be regarded as productive enough" Peter Higgs (The Guardian, 6 Dec 2013)
+
+> "I've been on a number of search committees. I don't remember anybody looking at anybody's papers. Number and IF \[impact factor\] of pubs are what counts." Terry McGlynn (realscientists) (21 October 2015, 4:12 p.m. Tweet.)
+
+::: notes
+-   Publish or perish. Newly hired biologies have almost twice as many publications as they did a decade ago.[@smaldino_natural_2016]
+:::
+
+## So many examples
+
+-   Brain-wide association studies, median sample size: 25, sample size needed to be robust: \>1000 [@marek_reproducible_2022]
+-   That time a tower of over 400 false studies was conducted around 5-HTTLPR and depression, good summary [here](https://slatestarcodex.com/2019/05/07/5-httlpr-a-pointed-review/) [@border_no_2019]
+-   There are lots of great selfish reasons to purse reproducibly too! [@markowetz_five_2015]
+
+## Moving beyond idealogy
+
+-   I propose we work towards building a practical workflow for embedding reproducibility throughout all projects:
+    -   Built around a [GitHub organisation](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations) (Either at the centre or group level)
+    -   Employ self-documented templates for consistent folder structure
+    -   Agree on standardised file naming conventions (descriptive, human and machine readable, sane default ordering and search)
+
+## An example - you have a new hypothesis
+
+1.  Copy the template to a new repository
+2.  Begin planning: Use [Project boards](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) for building timelines and assigning tasks/deadlines to specific users (students/post-docs)
+3.  First aim for a [registered report](https://peercommunityin.org/2020/01/15/submit-your-preregistration-to-peer-community-in-for-peer-review/)
+4.  Use [Issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) to track ideas, tasks and troubleshooting (protocols)
+5.  Use literate programming approach ([Quarto](https://quarto.org/), [Jupyter Notebooks](https://jupyter.org/), [Org-mode](https://orgmode.org/), etc) for writing all documentation (notes, papers, slides, etc)
+
+## Incorporating funding
+
+-   If funding isn't already in place, one could use the registered report and repo to showcase budgets, timelines, lay summaries on your own terms (no need to adapt to asinine funder-specific structures)
+-   Begin experiments as normal, being sure to continue using the GitHub repo to update progress (tasks completed, delays, troubleshooting, etc.)
+-   Keep project contributions of any size logged on the repo (acknowledgement for technicians/RAs and others)
+
+## Write up and publish
+
+-   Write up paper and publish as normal (ideally avoiding for-profit journals, and sticking to [diamond open access](https://en.wikipedia.org/wiki/Diamond_open_access)
+-   Share raw data either on GitHub repo, or provide links to location on other repositories (and ideally pre-processed data)
+-   Provide container with computational environment used for analysis
+
+<!-- define the final slide  -->
+
+## Thanks for listening {.final-slide background-image="_extensions/H-Mateus/ukdri/title_background.png" style="color: #0ac8ff;"}
+
+Any feedback or suggestions welcome!
+
+```{r}
+#| eval: false
+png("images/qrcode.png")
+qrcode_gen("https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide")
+dev.off()
+```
+
+Any questions?
+
+-   Slides can be found at this link: <https://h-mateus.github.io/presentations/dri-ecr-talk_2022-10-25/index.html#/title-slide>
+
+::: columns
+::: {.column width="40%"}
+-   Or scan this QR code:
+:::
+
+::: {.column width="40%"}
+![](images/qrcode.png){width="50%"}
+:::
+
+::: {.column width="20%"}
+:::
+:::
+
+::: footer
+:::
+
+<!--Use the following to add further logos to the title/final slide-->
+
+<!--Adjust sizing in the CSS file-->
+
+::: title-logo-1
+:::
+
+::: title-logo-2
+:::
+
+## References {.scrollable}
