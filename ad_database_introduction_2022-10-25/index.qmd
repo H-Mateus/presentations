@@ -78,16 +78,13 @@ execute:
 
 ## I use librarian to both install/load packages
 library(librarian)
-pkg <- c("tidyverse", "RPostgreSQL", "janitor", "gt", "qrcode")
+pkg <- c("tidyverse", "RPostgres", "dbplyr", "janitor", "gt", "qrcode")
 shelf(pkg)
 rm(pkg)
 
 ## then we need to build a connection object:
-## first, load the PostgreSQL driver
-drv <- dbDriver("PostgreSQL")
-## then define the connection parameters
 ## note that "con" will be used later in each connection to the database
-con <- dbConnect(drv, dbname = "ad_phenotype_db",
+con <- dbConnect(RPostgres::Postgres(), dbname = "ad_phenotype_db",
                  host = "localhost", port = 5432,
                  user = "mateusbernardo-harrington")
 ```
@@ -104,7 +101,7 @@ dbListTables(con)
 
 ```{r}
 ## we can pull a given table like so
-education_df <- dbReadTable(con, "education")
+education_df <- tbl(con, "education")
 gt(head(education_df))
 ```
 
