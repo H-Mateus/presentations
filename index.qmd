@@ -4,7 +4,8 @@ format:
     theme: dark
     footer: |
       Author: [Gabriel Mateus Bernardo Harrington](https://gmbernardoharrington.netlify.app/)<br>
-      Last modified: 2022-10-25
+      Last modified: 2022-12-05
+    # footer: Test !expr 'paste("Air", "Quality")'
     slide-number: c/t
 ---
 
