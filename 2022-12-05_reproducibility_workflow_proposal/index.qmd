@@ -76,6 +76,7 @@ dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
 -   Brain-wide association studies, median sample size: 25, sample size needed to be robust: \>1000 [@marek_reproducible_2022]
 -   That time a tower of over 400 false studies was conducted around 5-HTTLPR and depression, good summary [here](https://slatestarcodex.com/2019/05/07/5-httlpr-a-pointed-review/) [@border_no_2019]
 -   There are lots of great selfish reasons to purse reproducibly too! [@markowetz_five_2015]
+-   And of course, the somewhat recent seminal amyloid paper that is [suspected to be dodgy](https://www.theguardian.com/society/2022/jul/23/alzheimers-study-fraudulent) [@lesne_specific_2006]
 
 ## Moving beyond idealogy
 
