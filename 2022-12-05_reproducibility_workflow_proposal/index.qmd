@@ -103,7 +103,7 @@ dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
 
 -   Write up paper and publish as normal (ideally avoiding for-profit journals, and sticking to [diamond open access](https://en.wikipedia.org/wiki/Diamond_open_access))
 -   Share raw data either on GitHub repo, or provide links to location on other repositories (and ideally pre-processed data)
--   Provide container with computational environment used for analysis ([Docker](https://www.docker.com/)(/[Singularity](https://docs.sylabs.io/guides/latest/user-guide/))
+-   Provide container with computational environment used for analysis ([Docker](https://www.docker.com/)/[Singularity](https://docs.sylabs.io/guides/latest/user-guide/))
 
 <!-- define the final slide  -->
 
