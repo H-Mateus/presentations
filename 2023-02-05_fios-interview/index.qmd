@@ -126,7 +126,8 @@ ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
       colour = "black"
     )
   ) +
-viridis::scale_fill_viridis(name = "", discrete = TRUE) +
+viridis::scale_fill_viridis(labels = c("General linear model", "Linear model"), 
+                            name = "Model type", discrete = TRUE) +
   ggpubr::theme_pubr()
 ```
 
@@ -221,7 +222,7 @@ The fold changes in the KEGG pathway are from the Acute AIS C improvers relative
 #| fig-height: 10
 plot_saa1 <- df_filt %>%
     dplyr::filter(gene == "SAA1") %>%
-    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change)) +
     geom_bar(stat="identity", position = position_dodge()) +
     facet_wrap( ~ gene) +
     labs(x = "", y = expression(log[2] ~ fold - change)) +
@@ -232,7 +233,7 @@ plot_saa1 <- df_filt %>%
 plot_saa1 +
   theme(legend.position = "none",
         axis.text = element_text(size = 15, face = "bold", colour = "black")) +
-  viridis::scale_fill_viridis(name = "", discrete = TRUE) +
+  #viridis::scale_fill_viridis(name = "", discrete = TRUE) +
   ggpubr::theme_pubr(legend = "none")
 ```
 :::
@@ -288,11 +289,25 @@ plot_saa1 +
 
 ## Sex stratification in AD
 
-- Seq data from the largest AD consortium
-- Looking at sex difference in variant associations
-- Ongoing work, pipeline written in Nextflow with fully containerised processes
-- Incorporating Gitlab CIs for testing, linting, etc
+-   Seq data from the largest AD consortium
+-   Looking at sex difference in variant associations
+-   Ongoing work, pipeline written in Nextflow with fully containerised processes
+-   Incorporating Gitlab CIs for testing, linting, etc
 
 ![](images/nextflow_logo.png){fig-align="center"}
+
+## Management of research infrastructure
+
+::: columns
+::: {.column width="50%"}
+-   Leading a push for more robust and reproducible bioinformatics (and research in general)
+-   Standardising project structures, version control CI, containerisation, etc
+-   Managing student projects, providing training in this space
+:::
+
+::: {.column width="50%"}
+![](images/infrastructure-unsplash.jpg){fig-align="center" width="59%"}
+:::
+:::
 
 ## References
