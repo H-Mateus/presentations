@@ -1,0 +1,298 @@
+---
+title: "Adventures into Bioinformatics"
+subtitle: "A whistle-stop tour of my own journey"
+author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
+date: "2023-03-09"
+date-format: iso
+institute: "Research Associate<br>Williams lab"
+format:
+  revealjs:
+    theme: [dark, custom.scss]
+    logo: fios-logo.png
+    smaller: true
+    scrollable: true
+bibliography: references.bib
+---
+
+```{r}
+#| echo: false
+#| include: false
+library(librarian)
+pkg <- c("tidyverse", "kableExtra", "ggpubr")
+shelf(pkg)
+rm(pkg)
+```
+
+```{r}
+#| label: data-prep
+#| echo: false
+#| include: false
+## openms data
+foldchange_list <- readRDS("../../thesis/proteomics/data/openms/protein_quantification_foldchanges.rds")
+## merge list of dfs
+fc_openms <- do.call(rbind, foldchange_list)
+## add run column
+fc_openms <- fc_openms %>%
+    rownames_to_column() %>%
+    dplyr::mutate(run = case_when(
+                      grepl("run1", rowname) ~ "1",
+                      TRUE ~ "2")) %>%
+    dplyr::mutate(group_labels = paste(comparison, run, sep = "_run"))
+## sort group labels
+fc_openms$group_labels <- as.factor(fc_openms$group_labels)
+levels(fc_openms$group_labels) <- c("Acute AIS A vs D",
+                                "Acute AIS C improvers vs A",
+                                "Acute AIS C improvers vs non-improvers",
+                                "Acute AIS C improvers vs non-improvers (2)",
+                                "AIS C improvers acute vs subacute",
+                                "Acute AIS C improvers vs D",
+                                "Acute AIS C non-improvers vs A",
+                                "AIS C non-improvers acute vs subacute",
+                                "Acute AIS C non-improvers vs D", "CROSS-RUN",
+                                "Subacute AIS C improvers vs non-improvers",
+                                "CROSS-RUN2", "CROSS-RUN3", "CROSS-RUN4")
+## vector of proteins to filter to
+proteins <- c("A2M|APOE|RBP4|SAA1")
+## filter df
+df_filt_oms <- fc_openms %>%
+    dplyr::filter(grepl(proteins, gene) & !grepl("CROSS", group_labels))
+
+## proteinpilot data
+load(file = "../../thesis/proteomics/data/protein_descriptions_long.rda")
+## vector of proteins to filter to
+proteins <- c("A2M -|APOE -|RBP4 -|SAA1 -")
+## filter df
+df_filt_pp <- protein_descriptions %>%
+    dplyr::filter(grepl(proteins, protein_name)) %>%
+    dplyr::mutate(gene = gsub( " .*$", "", protein_name),
+        prot_full_name = strsplit(protein_name, " - ")[[1]][2])
+## update group labels
+df_filt_pp$group_labels <- as.factor(df_filt_pp$group_labels)
+new_labs <- c("Acute A VS Acute D",
+              "Acute VS Subacute C improvers",
+              "Acute C improvers VS non-improvers",
+              "Acute C improvers VS Subacute non-improvers",
+              "Subacute C improvers VS Acute C non-improvers",
+              "Subacute C improvers VS non-improvers",
+              "Acute Vs Subacute C non-improvers",
+              "Acute C improvers VS non-improvers (2)",
+              "Acute C improvers VS Acute A",
+              "Acute C improvers VS Acute D",
+              "Acute C non-improvers VS Acute A",
+              "Acute C non-improvers VS Acute D")
+levels(df_filt_pp$group_labels) <- new_labs
+df_filt_pp$log2_fold_change <- df_filt_pp$fold_change
+## choose which dataset to use
+df_filt <- df_filt_pp
+## df_filt <- df_filt_oms
+
+## get model data
+df_models <- read_rds('../iscos_sci_proteomics_2021-08-31/heam_model_data.rds')
+```
+
+## PhD overview
+
+-   ***Aim***: Investigate unexplained variability in Spinal cord injury (SCI) functional outcomes
+-   ***Approach***: Compare routine haematological data and human plasma proteomes from patients who experienced significant recover VS those who didn't across time
+
+## Prognostic modelling with electronic health records
+
+-   My first foray into R!
+-   Modelling of SCI neurological outcomes with routine haematological markers [@brown_preliminary_2019; @bernardo_harrington_routinely_2020]
+-   Found markers associated with liver function added modest predictive value
+-   Implicates liver status/metabolic health with neurological outcomes
+
+```{r}
+#| fig-align: center
+ggplot(df_models, aes(x = target_name, y = Rsquare, fill = modelName)) +
+  geom_bar(stat = "identity",
+           position = position_dodge(),
+           color = "black") +
+  xlab("") +
+  ylab(parse(text = "R^2")) +
+  scale_y_continuous(limits = c(0, 1)) +
+  ## theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.5)) +
+  scale_x_discrete(
+    labels = function(x)
+      str_wrap(str_replace_all(x, "foo" , " "),
+               width = 20)
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    axis.text = element_text(
+      size = 18,
+      face = "bold",
+      colour = "black"
+    )
+  ) +
+viridis::scale_fill_viridis(name = "", discrete = TRUE) +
+  ggpubr::theme_pubr()
+```
+
+## "Bottom-up" Proteomics - A brief overview
+
+1.  Extract consistent total protein concentration for each sample
+2.  Optional dimensionality reduction steps (e.g. via Proteominer™ beads)
+3.  Digest proteins (Trypsin is commonly used)
+4.  For labelled techniques, the labels are applied
+5.  Samples are fed through some flavour of chromatography and into the mass spec (e.g. high-performance liquid chromatography)
+
+## Techniques used:
+
+-   Isobaric tag for relative and absolute quantitation ([iTRAQ](https://en.wikipedia.org/wiki/Isobaric_tag_for_relative_and_absolute_quantitation)) and [label-free](https://en.wikipedia.org/wiki/Label-free_quantification) proteomic experiments were conducted
+
+![](images/itraq_labels.png){fig-align="center"}
+
+::: notes
+-   Highlight complexity and uncertainty in measurements - put data in context, further work needed etc.
+:::
+
+## Dynamic range reduction via<br>Proteominer™ beads
+
+-   Abundant proteins saturate beads, whereas less abundant proteins don't
+-   Once the column is washed, the excess abundant proteins are removed, and the less abundant proteins are retained, thus the dynamic range is reduced
+
+![](images/label-free_and_itraq_image_ch.png){fig-align="center"}
+
+## Bioinformatic processing
+
+1.  Sciex mass spec produce proprietary .wiff format files \> convert to open .MZML
+2.  Prep reference database - decoys
+3.  Run search - match spectra to peptides
+4.  Index \> score PSM
+5.  Score estimation and protein inference
+6.  Differential abundance analysis
+
+::: notes
+-   chromatography used to prevent too many ions entering the mass spec at once by separating them on a gradient (liquid chromatography)
+-   multiple files per fraction - need to merge them
+-   for search:
+    -   fixed mod is methylthio C (alkylating agent used in prep) + itraq4plex (N-term) and variable oxidation M
+    -   report smallest number of protein groups that explain all peptides
+-   PSM = peptide-spectrum matches \> percolator (semi-supervised machine learning to correct PSM)
+-   protein inference \> epifany - Bayesian protein inference engine
+:::
+
+<!-- ## Experimental design -->
+
+<!-- -   Plasma from SCI human patients -->
+
+<!-- -   Two time points: -->
+
+<!--     1.  "Acute": \~2-weeks post-injury -->
+
+<!--     2.  "Subacute": \~3-months post-injury [^1] -->
+
+<!-- -   Improvers are AIS C patients who experienced an AIS grade conversion -->
+
+<!-- -   2 4-plex iTRAQ runs and a more recent label-free experiment with all samples -->
+
+<!-- [^1]: iTRAQ experiments did not include AIS A or D groups at the subacute time point -->
+
+<!-- ```{r, label='sample-counts'} -->
+
+<!-- sample_counts <- read_csv("data/sample_counts_2021-04-30.csv") -->
+
+<!-- kbl(sample_counts) %>% -->
+
+<!--     kable_styling(bootstrap_options = c("hover")) -->
+
+<!-- ``` -->
+
+## iTRAQ key pathway - Complement cascade
+
+-   Total number of proteins identified: `r length(unique(fc_openms$gene))`
+-   Majority of proteins identified are part of the complement cascade, differences in these pathways appears to be at least partially responsible for heterogeneous outcomes
+-   Many of these proteins interact with the liver in some capacity
+
+![](images/hsa04610_pathview.png){fig-align="center"}
+
+::: notes
+The fold changes in the KEGG pathway are from the Acute AIS C improvers relative to non-improvers
+:::
+
+## iTRAQ key protein identified: Serum amyloid A1
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| label: saa1-plot
+#| fig-height: 10
+plot_saa1 <- df_filt %>%
+    dplyr::filter(gene == "SAA1") %>%
+    ggplot(aes(x = reorder(group_labels, -log2_fold_change), y = log2_fold_change, fill = group_labels)) +
+    geom_bar(stat="identity", position = position_dodge()) +
+    facet_wrap( ~ gene) +
+    labs(x = "", y = expression(log[2] ~ fold - change)) +
+    theme(legend.position = "none", axis.text = element_text(size = 15, face = "bold")) +
+    scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "foo" , " "),
+                                                   width = 15)) +
+    coord_flip()
+plot_saa1 +
+  theme(legend.position = "none",
+        axis.text = element_text(size = 15, face = "bold", colour = "black")) +
+  viridis::scale_fill_viridis(name = "", discrete = TRUE) +
+  ggpubr::theme_pubr(legend = "none")
+```
+:::
+
+::: {.column width="60%"}
+-   [Serum amyloid A1](https://www.uniprot.org/uniprot/P0DJI8)
+-   Precursor of amyloid A, the aberrant deposition of which leads to inflammatory amyloidosis [@sun_serum_2016]
+-   Produced by hepatocytes, during acute phase response they associate with HDL, displacing ApoA1 [@benditt_amyloid_1977]
+-   SAA binding HDL is thought to favour removal of cholesterol from sites of inflammation
+-   SAA can also bind retinol, potentially limiting bacterial burden in tissues [@derebe_serum_2014]
+:::
+:::
+
+::: notes
+### Proteinpilot
+
+-   way more abundant in subacute C imp vs non-imp (\~28 fc)
+-   even more so in acute C imp vs D
+
+### Openms
+
+-   Downreg in acute C imp vs non-imp (\~ -2.5 fc)
+-   Upreg in subacute C imp vs non-imp (\~ 2.4 fc)
+-   Downreg in C groups and D vs A
+:::
+
+## Label-free proteomics
+
+-   Substantial overlap in proteins identified
+-   Complement cascade still the most significant
+-   Additional Proteins of interest:
+    -   Peroxiredoxin 2, detected in Acute C improvers but not Acute C non-improvers. Involved in oxidative stress response
+    -   Several immunoglobulins variable and constant regions, potential link to work suggesting IVIG therapy benefiting outcomes? [@brennan_ivig_2016]
+
+### Link between metabolic status and SCI?
+
+-   Mounting evidence to support a link between the liver, and perhaps metabolic health more broadly, and SCI, including neurological outcomes
+-   Excellent review by Goodus and McTigue on the topic [@goodus_hepatic_2020]
+
+::: notes
+-   touch on future work
+-   validation at Glasgow
+:::
+
+## Building a dementia phenotype database
+
+-   Large scale cohorts studies with data stretch back 20 years
+-   Physical paper records \> OCR scanning \> arcane excel macros \> terrible mess
+-   Built a PostgreSQL database to replace this, and link to sample data
+    -   Currently being used by staff and students to support research
+
+![](images/postgresql-1110x630.jpg){fig-align="center"}
+
+## Sex stratification in AD
+
+- Seq data from the largest AD consortium
+- Looking at sex difference in variant associations
+- Ongoing work, pipeline written in Nextflow with fully containerised processes
+- Incorporating Gitlab CIs for testing, linting, etc
+
+![](images/nextflow_logo.png){fig-align="center"}
+
+## References
