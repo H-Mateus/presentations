@@ -14,6 +14,8 @@ format:
     theme: [default, custom.scss]
     logo: dri_logo.jpg
     slide-number: c/t
+    mermaid: 
+      theme: forest
 csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouver.csl
 bibliography: references.bib
 ---
@@ -114,7 +116,8 @@ leaflet() %>%
 ## Adventures in a PhD
 
 ```{mermaid}
-%%| fig-width: 7.5
+%%| fig-width: 9.5
+%%| fig-height: 6.5
 graph TD
     F-->A2
     subgraph Pre-PhD 2016-18
