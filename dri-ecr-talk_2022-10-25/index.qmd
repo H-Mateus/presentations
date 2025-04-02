@@ -10,11 +10,11 @@ title-slide-attributes:
   #data-background-opacity: "0.5"
   presentation-heading-color: #FFFFFF
 format:
-  revealjs: 
+  revealjs:
     theme: [default, custom.scss]
     logo: dri_logo.jpg
     slide-number: c/t
-    mermaid: 
+    mermaid:
       theme: forest
 csl: /Users/mateusbernardo-harrington/Documents/citation_styles/elsevier-vancouver.csl
 bibliography: references.bib
@@ -46,8 +46,8 @@ dri_hexcolours <- c("dark_blue" = "#00326e", "light_grey" = "#c4d1d9",
 ## Origins
 
 ```{r}
-leaflet() %>% 
-  addTiles() %>% 
+leaflet() %>%
+  addTiles() %>%
   setView(0.009821, 51.493367, zoom = 13)
 ```
 
