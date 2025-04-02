@@ -2,8 +2,8 @@
 title: "A life story in brief"
 subtitle: "ECR Forum"
 author: '<span style="color:white;">Gabriel Mateus Bernardo Harrington</span>'
-date: "2022-10-26<br>(Last modified: `r Sys.Date()`)"
-institute: "Research Associate<br>Williams lab"
+date: "2025-04-02"
+institute: "Research Associate<br>Webber lab"
 title-slide-attributes:
   data-background-image: title_background.png
   data-background-size: contain
@@ -57,7 +57,7 @@ leaflet() %>%
 -   It's a nice borough, you should visit
 :::
 
-## "Eductation"
+## "Education"
 
 ::: columns
 ::: {.column width="5%"}
@@ -116,9 +116,9 @@ leaflet() %>%
 ## Adventures in a PhD
 
 ```{mermaid}
-%%| fig-width: 9.5
-%%| fig-height: 6.5
-graph TD
+%%| fig-width: 9.0
+%%| fig-height: 6.0
+graph LR
     F-->A2
     subgraph Pre-PhD 2016-18
         A[BSc: Biological Sciences<br>- Lancaster University] -->|existential angst| B(Optogenetics in Cochlea implants<br>- Bionics institute, Melbourne)
@@ -138,13 +138,38 @@ graph TD
 
 ![](https://media.giphy.com/media/xUPGcC3CMtnDrScvf2/giphy.gif)
 
-## One recommendation
+## ECR informatics committee
+
+- We try to serve the community of "informatics" folk (we're very inclusive!) - website [here](https://ukdri.github.io/ECR-Informatics-Committee/)
+- Current recurring events:
+    - Behind the P-value - A exploration of a piece of analyse someone has done (e.g. explaining how a figure was made)
+    - Bytes cafe - A more casual chat, starts with "discoveries" where were share handy things we've found (packages, functions, papers, videos, etc), then have breakout rooms to discuss topics of interest
+        - Next one is later this month, sign up!
+
+## Recommendation: learn to code!
+
+- If you're gonna be doing the same types of experiments over and over, then you're doing the same analysis over and over
+    - So if you have code for that analyse you'll save loads of time, minimise mistakes and improve reproducibility!
+- It's also great for the old CV!
+- Some resource recommendations:
+    - [R for data science](https://r4ds.hadley.nz/) - a nice free book
+    - [swirl](https://swirlstats.com/) - an R package for learning R in R!
+    - There're loads of YouTube videos, find one you like ([here is an example](https://www.youtube.com/watch?v=yZ0bV2Afkjc&pp=ygUQciBmb3Igc2NpZW50aXN0cw%3D%3D))
+
+## Another recommendation
 
 -   [Quarto®](https://quarto.org/) is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/)
 -   It's an excellent and versatile framework for reproducible and shareable articles, notes, presentations, websites, books (thesis!) and more
 -   I wrote my PhD thesis with the precursor to Quarto (RMarkdown - it was real helpful!)
 
 [![](images/quarto.png){fig-align="center"}](https://quarto.org/)
+
+## Reproducibility good!
+
+- There is the reproducibility working group, join if you're interested!
+- [The Turing Way](https://book.the-turing-way.org/) is a great resource and community focused around how to do reproducible science
+- I'm always happy to chat and support folk in this space
+    - Would a bunch of you like any events related to this? A workshop, seminar, other training? Let me know!
 
 ## Some examples
 
